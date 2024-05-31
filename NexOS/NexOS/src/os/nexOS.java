@@ -10,6 +10,8 @@ import java.awt.GridBagLayout;
 import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -39,6 +41,7 @@ public class nexOS extends javax.swing.JFrame {
         changePriorityPanel.setVisible(false);
         MemoryManagement.setVisible(false);
         SchedulingPanel.setVisible(false);
+        IOmanagmentPanel.setVisible(false);
         
         
     }
@@ -71,12 +74,16 @@ public class nexOS extends javax.swing.JFrame {
         destroyScroll = new javax.swing.JScrollPane();
         destroyPanel = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
+        IOmanagmentPanel = new javax.swing.JPanel();
+        goBack3 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         MemoryManagement = new javax.swing.JPanel();
         goBack1 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         SchedulingPanel = new javax.swing.JPanel();
-        pbButton = new javax.swing.JButton();
+        sjfNonPremButton = new javax.swing.JButton();
         rrButton = new javax.swing.JButton();
+        fcfsPremButton = new javax.swing.JButton();
         fcfsButton = new javax.swing.JButton();
         sjfButton = new javax.swing.JButton();
         DisplaySchedulingPanel = new javax.swing.JPanel();
@@ -84,7 +91,7 @@ public class nexOS extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         MainPanel = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        MemoryManag = new javax.swing.JButton();
         ProcessManagementButton = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -267,6 +274,21 @@ public class nexOS extends javax.swing.JFrame {
 
         getContentPane().add(ProcessPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 540));
 
+        IOmanagmentPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        goBack3.setText("                                                            ");
+        goBack3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                goBack3MouseClicked(evt);
+            }
+        });
+        IOmanagmentPanel.add(goBack3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 220, 40));
+
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/memory-management.png"))); // NOI18N
+        IOmanagmentPanel.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 540));
+
+        getContentPane().add(IOmanagmentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 540));
+
         MemoryManagement.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         goBack1.setText("                                                            ");
@@ -284,16 +306,16 @@ public class nexOS extends javax.swing.JFrame {
 
         SchedulingPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pbButton.setBackground(new java.awt.Color(22, 41, 42));
-        pbButton.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
-        pbButton.setForeground(new java.awt.Color(170, 171, 171));
-        pbButton.setText("Priority Base");
-        pbButton.addActionListener(new java.awt.event.ActionListener() {
+        sjfNonPremButton.setBackground(new java.awt.Color(22, 41, 42));
+        sjfNonPremButton.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
+        sjfNonPremButton.setForeground(new java.awt.Color(170, 171, 171));
+        sjfNonPremButton.setText("SJF(Non-Premptive)");
+        sjfNonPremButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pbButtonActionPerformed(evt);
+                sjfNonPremButtonActionPerformed(evt);
             }
         });
-        SchedulingPanel.add(pbButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 160, 200, 28));
+        SchedulingPanel.add(sjfNonPremButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(405, 160, 150, 28));
 
         rrButton.setBackground(new java.awt.Color(22, 41, 42));
         rrButton.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
@@ -304,7 +326,18 @@ public class nexOS extends javax.swing.JFrame {
                 rrButtonActionPerformed(evt);
             }
         });
-        SchedulingPanel.add(rrButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 160, 200, 28));
+        SchedulingPanel.add(rrButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 160, 150, 28));
+
+        fcfsPremButton.setBackground(new java.awt.Color(22, 41, 42));
+        fcfsPremButton.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
+        fcfsPremButton.setForeground(new java.awt.Color(170, 171, 171));
+        fcfsPremButton.setText("FCFS(Premptive)");
+        fcfsPremButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fcfsPremButtonActionPerformed(evt);
+            }
+        });
+        SchedulingPanel.add(fcfsPremButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 150, 28));
 
         fcfsButton.setBackground(new java.awt.Color(22, 41, 42));
         fcfsButton.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
@@ -315,7 +348,7 @@ public class nexOS extends javax.swing.JFrame {
                 fcfsButtonActionPerformed(evt);
             }
         });
-        SchedulingPanel.add(fcfsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, 200, 28));
+        SchedulingPanel.add(fcfsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, 150, 28));
 
         sjfButton.setBackground(new java.awt.Color(22, 41, 42));
         sjfButton.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
@@ -326,7 +359,7 @@ public class nexOS extends javax.swing.JFrame {
                 sjfButtonActionPerformed(evt);
             }
         });
-        SchedulingPanel.add(sjfButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(277, 160, 200, 28));
+        SchedulingPanel.add(sjfButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(585, 160, 150, 28));
 
         DisplaySchedulingPanel.setBackground(new java.awt.Color(17, 32, 33));
         DisplaySchedulingPanel.setForeground(new java.awt.Color(170, 171, 171));
@@ -354,16 +387,16 @@ public class nexOS extends javax.swing.JFrame {
         jButton3.setText("Other operations");
         MainPanel.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 450, 160, 40));
 
-        jButton7.setBackground(new java.awt.Color(22, 41, 42));
-        jButton7.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
-        jButton7.setForeground(new java.awt.Color(170, 171, 171));
-        jButton7.setText("Memory management");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        MemoryManag.setBackground(new java.awt.Color(22, 41, 42));
+        MemoryManag.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
+        MemoryManag.setForeground(new java.awt.Color(170, 171, 171));
+        MemoryManag.setText("Memory management");
+        MemoryManag.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                MemoryManagActionPerformed(evt);
             }
         });
-        MainPanel.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 450, 160, 40));
+        MainPanel.add(MemoryManag, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 450, 160, 40));
 
         ProcessManagementButton.setBackground(new java.awt.Color(22, 41, 42));
         ProcessManagementButton.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
@@ -385,6 +418,11 @@ public class nexOS extends javax.swing.JFrame {
         jButton8.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
         jButton8.setForeground(new java.awt.Color(170, 171, 171));
         jButton8.setText("I/O management");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
         MainPanel.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 450, 160, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/nexos.png"))); // NOI18N
@@ -430,10 +468,11 @@ public class nexOS extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
+    private void MemoryManagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MemoryManagActionPerformed
+        MemoryManagement.setVisible(true);
+        MainPanel.setVisible(false);
 
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_MemoryManagActionPerformed
 
     private void ProcessManagementButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProcessManagementButtonMouseClicked
 
@@ -1376,7 +1415,8 @@ public class CustomProcessInputDialog extends JDialog implements ActionListener 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void goBack1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBack1MouseClicked
-        // TODO add your handling code here:
+MemoryManagement.setVisible(false);
+        MainPanel.setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_goBack1MouseClicked
 
     private void goBack2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBack2MouseClicked
@@ -1584,63 +1624,137 @@ public class CustomProcessInputDialog extends JDialog implements ActionListener 
     }
     }//GEN-LAST:event_rrButtonActionPerformed
 
-    private void pbButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pbButtonActionPerformed
-        // Assume tempProcess array is defined and populated
-        Process[] tempProcess = process;
+    private void sjfNonPremButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sjfNonPremButtonActionPerformed
+ Process[] tempProcess = process.clone(); // Make a clone to avoid modifying original array
 
-        int[] remainingBurstTime = new int[n];
-        boolean[] isFirstResponse = new boolean[n];
-        int[] responseTimes = new int[n];
+    int n = tempProcess.length; // Number of processes
 
+    // Arrays to store remaining burst time, response times, and completion status
+    int[] remainingBurstTime = new int[n];
+    int[] responseTimes = new int[n];
+    boolean[] completed = new boolean[n];
+
+    // Initialize remaining burst time and completion status
+    for (int i = 0; i < n; i++) {
+        remainingBurstTime[i] = tempProcess[i].burstTime;
+        responseTimes[i] = -1; // -1 indicates response time not yet calculated
+        completed[i] = false;
+    }
+
+    int currentTime = 0;
+    int completedCount = 0;
+
+    while (completedCount != n) {
+        int shortest = -1;
+        int minBurstTime = Integer.MAX_VALUE;
+
+        // Find the process with the shortest remaining burst time
         for (int i = 0; i < n; i++) {
-            remainingBurstTime[i] = tempProcess[i].burstTime;
-            isFirstResponse[i] = true;
+            if (!completed[i] && tempProcess[i].arrivalTime <= currentTime && remainingBurstTime[i] < minBurstTime) {
+                minBurstTime = remainingBurstTime[i];
+                shortest = i;
+            }
         }
 
-        int completed = 0;
-        int currentTime = 0;
-        boolean foundProcess;
-
-        while (completed != n) {
-            foundProcess = false;
-            int minRemainingTime = Integer.MAX_VALUE;
-            int shortest = -1; // Initialize shortest process index within the loop
-
-            for (int i = 0; i < n; i++) {
-                if (tempProcess[i].arrivalTime <= currentTime && remainingBurstTime[i] > 0 && (shortest == -1 || comparePriority(tempProcess[i].priority, tempProcess[shortest].priority) < 0)) {
-                    shortest = i;
-                    foundProcess = true;
-                }
-            }
-
-            if (!foundProcess) {
-                currentTime++;
-                continue;
-            }
-
-            if (isFirstResponse[shortest]) {
-                responseTimes[shortest] = currentTime - tempProcess[shortest].arrivalTime;
-                isFirstResponse[shortest] = false;
-            }
-
-            remainingBurstTime[shortest]--;
+        if (shortest == -1) {
             currentTime++;
+            continue;
+        }
 
-            if (remainingBurstTime[shortest] == 0) {
-                completed++;
-                tempProcess[shortest].completionTime = currentTime;
-                tempProcess[shortest].turnAroundTime = tempProcess[shortest].completionTime - tempProcess[shortest].arrivalTime;
-                tempProcess[shortest].waitingTime = tempProcess[shortest].turnAroundTime - tempProcess[shortest].burstTime;
-                tempProcess[shortest].responseTime = responseTimes[shortest];
+        // Update response time if it's the first time the process is selected
+        if (responseTimes[shortest] == -1) {
+            responseTimes[shortest] = currentTime - tempProcess[shortest].arrivalTime;
+        }
 
-                System.out.println("Process ID: " + tempProcess[shortest].id);
-                System.out.println("Completion Time: " + tempProcess[shortest].completionTime);
-                System.out.println("Turnaround Time: " + tempProcess[shortest].turnAroundTime);
-                System.out.println("Waiting Time: " + tempProcess[shortest].waitingTime);
-                System.out.println("Response Time: " + tempProcess[shortest].responseTime);
+        // Decrement remaining burst time
+        remainingBurstTime[shortest]--;
+        currentTime++;
+
+        // Check if the process is completed
+        if (remainingBurstTime[shortest] == 0) {
+            completedCount++;
+            completed[shortest] = true;
+            tempProcess[shortest].completionTime = currentTime;
+            tempProcess[shortest].turnAroundTime = tempProcess[shortest].completionTime - tempProcess[shortest].arrivalTime;
+            tempProcess[shortest].waitingTime = tempProcess[shortest].turnAroundTime - tempProcess[shortest].burstTime;
+            tempProcess[shortest].responseTime = responseTimes[shortest];
+
+            // Print process details
+            System.out.println("Process ID: " + tempProcess[shortest].name);
+            System.out.println("Completion Time: " + tempProcess[shortest].completionTime);
+            System.out.println("Turnaround Time: " + tempProcess[shortest].turnAroundTime);
+            System.out.println("Waiting Time: " + tempProcess[shortest].waitingTime);
+            System.out.println("Response Time: " + tempProcess[shortest].responseTime);
+            System.out.println("");
+        }
+    }
+    }//GEN-LAST:event_sjfNonPremButtonActionPerformed
+
+    private void fcfsPremButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fcfsPremButtonActionPerformed
+    int currentTime = 0;
+    int totalWaitingTime = 0;
+    int totalTurnaroundTime = 0;
+
+    // Sort the processes based on their arrival times
+    for (int i = 0; i < n; i++) {
+        for (int j = i + 1; j < n; j++) {
+            if (process[i].arrivalTime > process[j].arrivalTime) {
+                // Swap the processes
+                Process temp = process[i];
+                process[i] = process[j];
+                process[j] = temp;
             }
         }
-    }//GEN-LAST:event_pbButtonActionPerformed
+    }
+
+    // Perform FCFS scheduling
+    for (Process p : process) {
+        if (p != null) { 
+            // Update the current time
+            if (p.arrivalTime > currentTime) {
+                currentTime = p.arrivalTime;
+            }
+
+            // Calculate the completion time
+            p.completionTime = currentTime + p.burstTime;
+            currentTime = p.completionTime;
+
+            // Calculate the waiting time, turnaround time, and response time
+            p.waitingTime = p.completionTime - p.arrivalTime - p.burstTime;
+            p.turnAroundTime = p.completionTime - p.arrivalTime;
+            p.responseTime = p.waitingTime;
+
+            // Update the total waiting time and total turnaround time
+            totalWaitingTime += p.waitingTime;
+            totalTurnaroundTime += p.turnAroundTime;
+        }
+    }
+
+    // Calculate the average waiting time and average turnaround time
+    double avgWaitingTime = (double) totalWaitingTime / n;
+    double avgTurnaroundTime = (double) totalTurnaroundTime / n;
+
+    // Display the results
+    System.out.println("Process\tCompletion Time\tWaiting Time\tTurnaround Time\tResponse Time");
+    for (Process p : process) {
+        if (p != null) { 
+            System.out.println(p.id + "\t" + p.completionTime + "\t" + p.waitingTime + "\t" + p.turnAroundTime + "\t" + p.responseTime);
+        }
+    }
+    System.out.println("Average Waiting Time: " + avgWaitingTime);
+    System.out.println("Average Turnaround Time: " + avgTurnaroundTime);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fcfsPremButtonActionPerformed
+
+    private void goBack3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBack3MouseClicked
+        IOmanagmentPanel.setVisible(false);
+        MainPanel.setVisible(true);
+    }//GEN-LAST:event_goBack3MouseClicked
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        IOmanagmentPanel.setVisible(true);
+        MainPanel.setVisible(false);
+    }//GEN-LAST:event_jButton8ActionPerformed
 private int comparePriority(String priority1, String priority2) {
     // Assigning numerical values to priorities
     int priorityValue1 = getPriorityValue(priority1);
@@ -1700,7 +1814,9 @@ private int getPriorityValue(String priority) {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel DisplaySchedulingPanel;
+    private javax.swing.JPanel IOmanagmentPanel;
     private javax.swing.JPanel MainPanel;
+    private javax.swing.JButton MemoryManag;
     private javax.swing.JPanel MemoryManagement;
     private javax.swing.JButton ProcessManagementButton;
     private javax.swing.JPanel ProcessPanel;
@@ -1720,28 +1836,30 @@ private int getPriorityValue(String priority) {
     private javax.swing.JPanel displayPPanel;
     private javax.swing.JScrollPane displayPScroll;
     private javax.swing.JButton fcfsButton;
+    private javax.swing.JButton fcfsPremButton;
     private javax.swing.JLabel goBack;
     private javax.swing.JLabel goBack1;
     private javax.swing.JLabel goBack2;
+    private javax.swing.JLabel goBack3;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JButton maxProcessButton;
     private javax.swing.JTextField maxProcessField;
-    private javax.swing.JButton pbButton;
     private javax.swing.JButton processButton;
     private javax.swing.JButton resumeButton;
     private javax.swing.JButton rrButton;
     private javax.swing.JButton sjfButton;
+    private javax.swing.JButton sjfNonPremButton;
     private javax.swing.JButton suspendButton;
     private javax.swing.JPanel suspendPanel;
     private javax.swing.JScrollPane suspendScroll;
