@@ -1,4 +1,3 @@
-
 package os;
 
 import java.awt.Color;
@@ -10,10 +9,9 @@ import java.awt.GridBagLayout;
 import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Queue;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -78,7 +76,23 @@ public class nexOS extends javax.swing.JFrame {
         goBack3 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         MemoryManagement = new javax.swing.JPanel();
+        FIFO = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
         goBack1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        Memorysize = new javax.swing.JTextField();
+        referstring = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        Framesize = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         SchedulingPanel = new javax.swing.JPanel();
         sjfNonPremButton = new javax.swing.JButton();
@@ -291,6 +305,48 @@ public class nexOS extends javax.swing.JFrame {
 
         MemoryManagement.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        FIFO.setBackground(new java.awt.Color(22, 41, 42));
+        FIFO.setForeground(new java.awt.Color(170, 171, 171));
+        FIFO.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel7.setFont(new java.awt.Font("SimSun", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(170, 171, 171));
+        jLabel7.setText("Page size");
+        FIFO.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 90, 30));
+
+        jLabel8.setFont(new java.awt.Font("SimSun", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(170, 171, 171));
+        jLabel8.setText("Hits");
+        FIFO.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 60, 30));
+
+        jLabel13.setFont(new java.awt.Font("SimSun", 1, 14)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(170, 171, 171));
+        jLabel13.setText("Reference string");
+        FIFO.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 140, 30));
+
+        jLabel14.setFont(new java.awt.Font("SimSun", 1, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(170, 171, 171));
+        jLabel14.setText("Frame no");
+        FIFO.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, 90, 30));
+
+        jLabel16.setFont(new java.awt.Font("SimSun", 1, 14)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(170, 171, 171));
+        jLabel16.setText("Page fault");
+        FIFO.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 90, 30));
+
+        jLabel17.setFont(new java.awt.Font("SimSun", 1, 14)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(170, 171, 171));
+        jLabel17.setText("Page number");
+        FIFO.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, 90, 30));
+
+        jLabel19.setBackground(new java.awt.Color(22, 41, 42));
+        jLabel19.setFont(new java.awt.Font("SimSun", 1, 24)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(170, 171, 171));
+        jLabel19.setText("LRU Output");
+        FIFO.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 150, 30));
+
+        MemoryManagement.add(FIFO, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 640, 350));
+
         goBack1.setText("                                                            ");
         goBack1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -298,6 +354,53 @@ public class nexOS extends javax.swing.JFrame {
             }
         });
         MemoryManagement.add(goBack1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 220, 40));
+
+        jLabel4.setFont(new java.awt.Font("SimSun", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(170, 171, 171));
+        jLabel4.setText("Enter memory size ");
+        MemoryManagement.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 230, 150, 40));
+
+        Memorysize.setFont(new java.awt.Font("SimSun", 1, 12)); // NOI18N
+        Memorysize.setForeground(new java.awt.Color(170, 171, 171));
+        Memorysize.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MemorysizeActionPerformed(evt);
+            }
+        });
+        MemoryManagement.add(Memorysize, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 240, 140, -1));
+        MemoryManagement.add(referstring, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 330, 140, -1));
+
+        jLabel6.setFont(new java.awt.Font("SimSun", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(170, 171, 171));
+        jLabel6.setText("Enter reference string");
+        MemoryManagement.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, 180, -1));
+
+        jButton2.setBackground(new java.awt.Color(22, 41, 42));
+        jButton2.setForeground(new java.awt.Color(170, 171, 171));
+        jButton2.setText("Submit");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        MemoryManagement.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 320, -1, -1));
+
+        jLabel18.setFont(new java.awt.Font("SimSun", 1, 24)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(170, 171, 171));
+        jLabel18.setText("LRU INPUT");
+        MemoryManagement.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 140, 200, 40));
+
+        jLabel5.setFont(new java.awt.Font("SimSun", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(170, 171, 171));
+        jLabel5.setText("Frame Size");
+        MemoryManagement.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(294, 290, 100, -1));
+
+        Framesize.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FramesizeActionPerformed(evt);
+            }
+        });
+        MemoryManagement.add(Framesize, new org.netbeans.lib.awtextra.AbsoluteConstraints(494, 280, 140, -1));
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/memory-management.png"))); // NOI18N
         MemoryManagement.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 540));
@@ -470,6 +573,7 @@ public class nexOS extends javax.swing.JFrame {
 
     private void MemoryManagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MemoryManagActionPerformed
         MemoryManagement.setVisible(true);
+      FIFO.setVisible(false);
         MainPanel.setVisible(false);
 
     }//GEN-LAST:event_MemoryManagActionPerformed
@@ -1746,6 +1850,68 @@ MemoryManagement.setVisible(false);
         IOmanagmentPanel.setVisible(true);
         MainPanel.setVisible(false);
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+      FIFO.setVisible(true);
+        String pagesStr = referstring.getText().trim(); // Example input from ;
+        int frameSize = Integer.parseInt(Framesize.getText().trim()); // Example input from ;
+        int memorySize = Integer.parseInt(Memorysize.getText().trim()); // Example input from ;
+        // Convert pagesStr to an array of integers
+        int[] pages = new int[pagesStr.length()];
+        for (int i = 0; i < pagesStr.length(); i++) {
+            pages[i] = Character.getNumericValue(pagesStr.charAt(i));
+        }
+        // Validate frameSize to not exceed memorySize
+        if (frameSize > memorySize) {
+            System.err.println("Error: Frame size cannot be greater than memory size.");
+            return;
+        }
+        // FIFO queue to hold the current pages in memory
+        Queue<Integer> fifoQueue = new ArrayDeque<>();
+        int pageFaults = 0;
+        int pageHits = 0;
+
+        // Process each page in the reference string
+        for (int i = 0; i < pages.length; i++) {
+            int currentPage = pages[i];
+
+            // Check if current page is already in memory
+            if (!fifoQueue.contains(currentPage)) {
+                // Page fault, because current page is not in memory
+                pageFaults++;
+
+                // If the FIFO queue is full, remove the oldest page (front of the queue)
+                if (fifoQueue.size() == frameSize) {
+                    int removedPage = fifoQueue.poll();
+                    System.out.println("Page " + removedPage + " removed from frame (Page Fault)");
+                }
+
+                // Add current page to the FIFO queue
+                fifoQueue.offer(currentPage);
+
+                System.out.println("Page " + currentPage + " added to frame (Page Fault)");
+            } else {
+                // Page hit, because current page is already in memory
+                pageHits++;
+                System.out.println("Page " + currentPage + " already in frame (Page Hit)");
+            }
+
+            System.out.println("Current frames: " + fifoQueue);
+        }
+
+        // Output the total number of page faults and page hits
+        System.out.println("\nTotal Page Faults: " + pageFaults);
+        System.out.println("Total Page Hits: " + pageHits);
+    
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void MemorysizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MemorysizeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MemorysizeActionPerformed
+
+    private void FramesizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FramesizeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FramesizeActionPerformed
 private int comparePriority(String priority1, String priority2) {
     // Assigning numerical values to priorities
     int priorityValue1 = getPriorityValue(priority1);
@@ -1805,10 +1971,13 @@ private int getPriorityValue(String priority) {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel DisplaySchedulingPanel;
+    private javax.swing.JPanel FIFO;
+    private javax.swing.JTextField Framesize;
     private javax.swing.JPanel IOmanagmentPanel;
     private javax.swing.JPanel MainPanel;
     private javax.swing.JButton MemoryManag;
     private javax.swing.JPanel MemoryManagement;
+    private javax.swing.JTextField Memorysize;
     private javax.swing.JButton ProcessManagementButton;
     private javax.swing.JPanel ProcessPanel;
     private javax.swing.JPanel SchedulingPanel;
@@ -1833,6 +2002,7 @@ private int getPriorityValue(String priority) {
     private javax.swing.JLabel goBack2;
     private javax.swing.JLabel goBack3;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton8;
@@ -1840,13 +2010,25 @@ private int getPriorityValue(String priority) {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JButton maxProcessButton;
     private javax.swing.JTextField maxProcessField;
     private javax.swing.JButton processButton;
+    private javax.swing.JTextField referstring;
     private javax.swing.JButton resumeButton;
     private javax.swing.JButton rrButton;
     private javax.swing.JButton sjfButton;
