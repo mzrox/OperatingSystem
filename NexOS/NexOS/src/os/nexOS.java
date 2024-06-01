@@ -1540,7 +1540,13 @@ public class CustomProcessInputDialog extends JDialog implements ActionListener 
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String input_id = changePriorityPId.getText();
-        int id = Integer.parseInt(input_id);
+        int id = 0;
+        try{
+            id = Integer.parseInt(input_id);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"INVALID INPUT. ("+ e.getMessage()+")");
+            return;
+        }
         String priority = (String) changePriorityPPriority.getSelectedItem();
         int found = 0;
         for(int i=0; i<n ; i++){
