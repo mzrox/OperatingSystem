@@ -1574,14 +1574,106 @@ MemoryManagement.setVisible(false);
         double avgTurnaroundTime = (double) totalTurnaroundTime / n;
 
         // Display the results
-        System.out.println("Process\tCompletion Time\tWaiting Time\tTurnaround Time\tResponse Time");
+        DisplaySchedulingPanel.removeAll();
+        DisplaySchedulingPanel.setLayout(null); // Set layout to null for absolute positioning
+
+        // Define initial coordinates for headers and data
+        int xHeaderOffset = 10;
+        int yHeaderOffset = 10;
+        int xDataOffset = 10;
+        int yDataOffset = 40;
+
+        // Create header labels
+        JLabel id = createHeaderLabel("ID");
+        id.setBounds(xHeaderOffset, yHeaderOffset, 80, 30);
+        DisplaySchedulingPanel.add(id);
+
+        JLabel name = createHeaderLabel("Name");
+        name.setBounds(xHeaderOffset + 100, yHeaderOffset, 150, 30);
+        DisplaySchedulingPanel.add(name);
+
+        JLabel at = createHeaderLabel("AT");
+        at.setBounds(xHeaderOffset + 200, yHeaderOffset, 120, 30);
+       DisplaySchedulingPanel.add(at);
+       
+        JLabel bt = createHeaderLabel("BT");
+        bt.setBounds(xHeaderOffset + 300, yHeaderOffset, 120, 30);
+        DisplaySchedulingPanel.add(bt);
+        
+        JLabel ct = createHeaderLabel("CT");
+        ct.setBounds(xHeaderOffset + 400, yHeaderOffset, 120, 30);
+        DisplaySchedulingPanel.add(ct);
+        
+        JLabel tat = createHeaderLabel("TAT");
+        tat.setBounds(xHeaderOffset + 500, yHeaderOffset, 120, 30);
+        DisplaySchedulingPanel.add(tat);
+        
+        JLabel wt = createHeaderLabel("WT");
+        wt.setBounds(xHeaderOffset + 600, yHeaderOffset, 120, 30);
+        DisplaySchedulingPanel.add(wt);
+        
+        JLabel rt = createHeaderLabel("RT");
+        rt.setBounds(xHeaderOffset + 700, yHeaderOffset, 120, 30);
+        DisplaySchedulingPanel.add(rt);
+        JLabel awt = createHeaderLabel("AWT");
+        awt.setBounds(xHeaderOffset + 750, yHeaderOffset, 120, 30);
+        DisplaySchedulingPanel.add(awt);
+        JLabel atat = createHeaderLabel("ATAT");
+        atat.setBounds(xHeaderOffset + 800, yHeaderOffset, 120, 30);
+        DisplaySchedulingPanel.add(atat);
+        JLabel pawt = createHeaderLabel(""+avgWaitingTime);
+        pawt.setBounds(xDataOffset + 750, yDataOffset, 120, 30);
+        DisplaySchedulingPanel.add(pawt);
+        JLabel patat = createHeaderLabel(""+avgTurnaroundTime);
+        patat.setBounds(xDataOffset + 800, yDataOffset, 120, 30);
+        DisplaySchedulingPanel.add(patat);
         for (Process p : process) {
             if (p != null) { 
-                System.out.println(p.id + "\t" + p.completionTime + "\t" + p.waitingTime + "\t" + p.turnAroundTime + "\t" + p.responseTime);
+                JLabel pid = createHeaderLabel(""+p.id);
+                pid.setBounds(xDataOffset, yDataOffset, 80, 30);
+                DisplaySchedulingPanel.add(pid);
+
+                JLabel pname = createHeaderLabel(p.name);
+                pname.setBounds(xDataOffset + 100, yDataOffset, 150, 30);
+                DisplaySchedulingPanel.add(pname);
+
+                JLabel pat = createHeaderLabel(""+p.arrivalTime);
+                pat.setBounds(xDataOffset + 200, yDataOffset, 120, 30);
+               DisplaySchedulingPanel.add(pat);
+
+                JLabel pbt = createHeaderLabel(""+p.burstTime);
+                pbt.setBounds(xDataOffset + 300, yDataOffset, 120, 30);
+                DisplaySchedulingPanel.add(pbt);
+
+                JLabel pct = createHeaderLabel(""+p.completionTime);
+                pct.setBounds(xDataOffset + 400, yDataOffset, 120, 30);
+                DisplaySchedulingPanel.add(pct);
+
+                JLabel ptat = createHeaderLabel(""+p.turnAroundTime);
+                ptat.setBounds(xDataOffset + 500, yDataOffset, 120, 30);
+                DisplaySchedulingPanel.add(ptat);
+
+                JLabel pwt = createHeaderLabel(""+p.waitingTime);
+                pwt.setBounds(xDataOffset + 600, yDataOffset, 120, 30);
+                DisplaySchedulingPanel.add(pwt);
+
+                JLabel prt = createHeaderLabel(""+p.responseTime);
+                prt.setBounds(xDataOffset + 700, yDataOffset, 120, 30);
+                DisplaySchedulingPanel.add(prt);
+                
+                  yDataOffset += 40;
+//                System.out.println(p.id + "\t" + p.completionTime + "\t" + p.waitingTime + "\t" + p.turnAroundTime + "\t" + p.responseTime);
             }
         }
-        System.out.println("Average Waiting Time: " + avgWaitingTime);
-        System.out.println("Average Turnaround Time: " + avgTurnaroundTime);
+        
+        DisplaySchedulingPanel.setPreferredSize(new Dimension(620, yDataOffset + 20));
+
+        // Repaint the destroyPanel to reflect changes
+        DisplaySchedulingPanel.revalidate();
+        DisplaySchedulingPanel.repaint();
+        
+//        System.out.println("Average Waiting Time: " + avgWaitingTime);
+//        System.out.println("Average Turnaround Time: " + avgTurnaroundTime);
     }//GEN-LAST:event_fcfsButtonActionPerformed
 
     private void sjfButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sjfButtonActionPerformed
@@ -1601,7 +1693,47 @@ MemoryManagement.setVisible(false);
     int currentTime = 0;
     int shortest = -1;
     boolean foundProcess;
+    DisplaySchedulingPanel.removeAll();
+        DisplaySchedulingPanel.setLayout(null); // Set layout to null for absolute positioning
 
+        // Define initial coordinates for headers and data
+        int xHeaderOffset = 10;
+        int yHeaderOffset = 10;
+        int xDataOffset = 10;
+        int yDataOffset = 40;
+
+        // Create header labels
+        JLabel id = createHeaderLabel("ID");
+        id.setBounds(xHeaderOffset, yHeaderOffset, 80, 30);
+        DisplaySchedulingPanel.add(id);
+
+        JLabel name = createHeaderLabel("Name");
+        name.setBounds(xHeaderOffset + 100, yHeaderOffset, 150, 30);
+        DisplaySchedulingPanel.add(name);
+
+        JLabel at = createHeaderLabel("AT");
+        at.setBounds(xHeaderOffset + 200, yHeaderOffset, 120, 30);
+       DisplaySchedulingPanel.add(at);
+       
+        JLabel bt = createHeaderLabel("BT");
+        bt.setBounds(xHeaderOffset + 300, yHeaderOffset, 120, 30);
+        DisplaySchedulingPanel.add(bt);
+        
+        JLabel ct = createHeaderLabel("CT");
+        ct.setBounds(xHeaderOffset + 400, yHeaderOffset, 120, 30);
+        DisplaySchedulingPanel.add(ct);
+        
+        JLabel tat = createHeaderLabel("TAT");
+        tat.setBounds(xHeaderOffset + 500, yHeaderOffset, 120, 30);
+        DisplaySchedulingPanel.add(tat);
+        
+        JLabel wt = createHeaderLabel("WT");
+        wt.setBounds(xHeaderOffset + 600, yHeaderOffset, 120, 30);
+        DisplaySchedulingPanel.add(wt);
+        
+        JLabel rt = createHeaderLabel("RT");
+        rt.setBounds(xHeaderOffset + 700, yHeaderOffset, 120, 30);
+        DisplaySchedulingPanel.add(rt);
     while (completed != n) {
         foundProcess = false;
         int minRemainingTime = Integer.MAX_VALUE;
@@ -1634,14 +1766,46 @@ MemoryManagement.setVisible(false);
             tempProcess[shortest].waitingTime = tempProcess[shortest].turnAroundTime - tempProcess[shortest].burstTime;
             tempProcess[shortest].responseTime = responseTimes[shortest];
 
-            System.out.println("Process ID: " + tempProcess[shortest].name);
-            System.out.println("Completion Time: " + tempProcess[shortest].completionTime);
-            System.out.println("Turnaround Time: " + tempProcess[shortest].turnAroundTime);
-            System.out.println("Waiting Time: " + tempProcess[shortest].waitingTime);
-            System.out.println("Response Time: " + tempProcess[shortest].responseTime);
-            System.out.println("");
+            JLabel pid = createHeaderLabel(""+tempProcess[shortest].id);
+                pid.setBounds(xDataOffset, yDataOffset, 80, 30);
+                DisplaySchedulingPanel.add(pid);
+
+                JLabel pname = createHeaderLabel(tempProcess[shortest].name);
+                pname.setBounds(xDataOffset + 100, yDataOffset, 150, 30);
+                DisplaySchedulingPanel.add(pname);
+
+                JLabel pat = createHeaderLabel(""+tempProcess[shortest].arrivalTime);
+                pat.setBounds(xDataOffset + 200, yDataOffset, 120, 30);
+               DisplaySchedulingPanel.add(pat);
+
+                JLabel pbt = createHeaderLabel(""+tempProcess[shortest].burstTime);
+                pbt.setBounds(xDataOffset + 300, yDataOffset, 120, 30);
+                DisplaySchedulingPanel.add(pbt);
+
+                JLabel pct = createHeaderLabel(""+tempProcess[shortest].completionTime);
+                pct.setBounds(xDataOffset + 400, yDataOffset, 120, 30);
+                DisplaySchedulingPanel.add(pct);
+
+                JLabel ptat = createHeaderLabel(""+tempProcess[shortest].turnAroundTime);
+                ptat.setBounds(xDataOffset + 500, yDataOffset, 120, 30);
+                DisplaySchedulingPanel.add(ptat);
+
+                JLabel pwt = createHeaderLabel(""+tempProcess[shortest].waitingTime);
+                pwt.setBounds(xDataOffset + 600, yDataOffset, 120, 30);
+                DisplaySchedulingPanel.add(pwt);
+
+                JLabel prt = createHeaderLabel(""+tempProcess[shortest].responseTime);
+                prt.setBounds(xDataOffset + 700, yDataOffset, 120, 30);
+                DisplaySchedulingPanel.add(prt);
+                
+                  yDataOffset += 40;
         }
     }
+            DisplaySchedulingPanel.setPreferredSize(new Dimension(620, yDataOffset + 20));
+
+        // Repaint the destroyPanel to reflect changes
+        DisplaySchedulingPanel.revalidate();
+        DisplaySchedulingPanel.repaint();
     }//GEN-LAST:event_sjfButtonActionPerformed
 
     private void rrButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rrButtonActionPerformed
@@ -1657,7 +1821,47 @@ MemoryManagement.setVisible(false);
         JOptionPane.showMessageDialog(null, "Input was cancelled.");
         return;
     }
+            DisplaySchedulingPanel.removeAll();
+        DisplaySchedulingPanel.setLayout(null); // Set layout to null for absolute positioning
 
+        // Define initial coordinates for headers and data
+        int xHeaderOffset = 10;
+        int yHeaderOffset = 10;
+        int xDataOffset = 10;
+        int yDataOffset = 40;
+
+        // Create header labels
+        JLabel id = createHeaderLabel("ID");
+        id.setBounds(xHeaderOffset, yHeaderOffset, 80, 30);
+        DisplaySchedulingPanel.add(id);
+
+        JLabel name = createHeaderLabel("Name");
+        name.setBounds(xHeaderOffset + 100, yHeaderOffset, 150, 30);
+        DisplaySchedulingPanel.add(name);
+
+        JLabel at = createHeaderLabel("AT");
+        at.setBounds(xHeaderOffset + 200, yHeaderOffset, 120, 30);
+       DisplaySchedulingPanel.add(at);
+       
+        JLabel bt = createHeaderLabel("BT");
+        bt.setBounds(xHeaderOffset + 300, yHeaderOffset, 120, 30);
+        DisplaySchedulingPanel.add(bt);
+        
+        JLabel ct = createHeaderLabel("CT");
+        ct.setBounds(xHeaderOffset + 400, yHeaderOffset, 120, 30);
+        DisplaySchedulingPanel.add(ct);
+        
+        JLabel tat = createHeaderLabel("TAT");
+        tat.setBounds(xHeaderOffset + 500, yHeaderOffset, 120, 30);
+        DisplaySchedulingPanel.add(tat);
+        
+        JLabel wt = createHeaderLabel("WT");
+        wt.setBounds(xHeaderOffset + 600, yHeaderOffset, 120, 30);
+        DisplaySchedulingPanel.add(wt);
+        
+        JLabel rt = createHeaderLabel("RT");
+        rt.setBounds(xHeaderOffset + 700, yHeaderOffset, 120, 30);
+        DisplaySchedulingPanel.add(rt);
     // Assume tempProcess array is defined and populated
     Process[] tempProcess = process;
 
@@ -1700,11 +1904,39 @@ MemoryManagement.setVisible(false);
                     tempProcess[i].waitingTime = tempProcess[i].turnAroundTime - originalBurstTime[i];
                     tempProcess[i].responseTime = responseTimes[i];
 
-                    System.out.println("Process ID: " + tempProcess[i].id);
-                    System.out.println("Completion Time: " + tempProcess[i].completionTime);
-                    System.out.println("Turnaround Time: " + tempProcess[i].turnAroundTime);
-                    System.out.println("Waiting Time: " + tempProcess[i].waitingTime);
-                    System.out.println("Response Time: " + tempProcess[i].responseTime);
+                    JLabel pid = createHeaderLabel(""+tempProcess[i].id);
+                pid.setBounds(xDataOffset, yDataOffset, 80, 30);
+                DisplaySchedulingPanel.add(pid);
+
+                JLabel pname = createHeaderLabel(tempProcess[i].name);
+                pname.setBounds(xDataOffset + 100, yDataOffset, 150, 30);
+                DisplaySchedulingPanel.add(pname);
+
+                JLabel pat = createHeaderLabel(""+tempProcess[i].arrivalTime);
+                pat.setBounds(xDataOffset + 200, yDataOffset, 120, 30);
+               DisplaySchedulingPanel.add(pat);
+
+                JLabel pbt = createHeaderLabel(""+tempProcess[i].burstTime);
+                pbt.setBounds(xDataOffset + 300, yDataOffset, 120, 30);
+                DisplaySchedulingPanel.add(pbt);
+
+                JLabel pct = createHeaderLabel(""+tempProcess[i].completionTime);
+                pct.setBounds(xDataOffset + 400, yDataOffset, 120, 30);
+                DisplaySchedulingPanel.add(pct);
+
+                JLabel ptat = createHeaderLabel(""+tempProcess[i].turnAroundTime);
+                ptat.setBounds(xDataOffset + 500, yDataOffset, 120, 30);
+                DisplaySchedulingPanel.add(ptat);
+
+                JLabel pwt = createHeaderLabel(""+tempProcess[i].waitingTime);
+                pwt.setBounds(xDataOffset + 600, yDataOffset, 120, 30);
+                DisplaySchedulingPanel.add(pwt);
+
+                JLabel prt = createHeaderLabel(""+tempProcess[i].responseTime);
+                prt.setBounds(xDataOffset + 700, yDataOffset, 120, 30);
+                DisplaySchedulingPanel.add(prt);
+                
+                  yDataOffset += 40;
                 }
             }
         }
@@ -1726,6 +1958,11 @@ MemoryManagement.setVisible(false);
             }
         }
     }
+            DisplaySchedulingPanel.setPreferredSize(new Dimension(620, yDataOffset + 20));
+
+        // Repaint the destroyPanel to reflect changes
+        DisplaySchedulingPanel.revalidate();
+        DisplaySchedulingPanel.repaint();
     }//GEN-LAST:event_rrButtonActionPerformed
 
     private void sjfNonPremButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sjfNonPremButtonActionPerformed
@@ -1743,7 +1980,47 @@ MemoryManagement.setVisible(false);
 
     int completed = 0;
     int currentTime = 0;
+    DisplaySchedulingPanel.removeAll();
+        DisplaySchedulingPanel.setLayout(null); // Set layout to null for absolute positioning
 
+        // Define initial coordinates for headers and data
+        int xHeaderOffset = 10;
+        int yHeaderOffset = 10;
+        int xDataOffset = 10;
+        int yDataOffset = 40;
+
+        // Create header labels
+        JLabel id = createHeaderLabel("ID");
+        id.setBounds(xHeaderOffset, yHeaderOffset, 80, 30);
+        DisplaySchedulingPanel.add(id);
+
+        JLabel name = createHeaderLabel("Name");
+        name.setBounds(xHeaderOffset + 100, yHeaderOffset, 150, 30);
+        DisplaySchedulingPanel.add(name);
+
+        JLabel at = createHeaderLabel("AT");
+        at.setBounds(xHeaderOffset + 200, yHeaderOffset, 120, 30);
+       DisplaySchedulingPanel.add(at);
+       
+        JLabel bt = createHeaderLabel("BT");
+        bt.setBounds(xHeaderOffset + 300, yHeaderOffset, 120, 30);
+        DisplaySchedulingPanel.add(bt);
+        
+        JLabel ct = createHeaderLabel("CT");
+        ct.setBounds(xHeaderOffset + 400, yHeaderOffset, 120, 30);
+        DisplaySchedulingPanel.add(ct);
+        
+        JLabel tat = createHeaderLabel("TAT");
+        tat.setBounds(xHeaderOffset + 500, yHeaderOffset, 120, 30);
+        DisplaySchedulingPanel.add(tat);
+        
+        JLabel wt = createHeaderLabel("WT");
+        wt.setBounds(xHeaderOffset + 600, yHeaderOffset, 120, 30);
+        DisplaySchedulingPanel.add(wt);
+        
+        JLabel rt = createHeaderLabel("RT");
+        rt.setBounds(xHeaderOffset + 700, yHeaderOffset, 120, 30);
+        DisplaySchedulingPanel.add(rt);
     while (completed != n) {
         int shortest = -1;
         int minBurstTime = Integer.MAX_VALUE;
@@ -1776,13 +2053,46 @@ MemoryManagement.setVisible(false);
         tempProcess[shortest].waitingTime = tempProcess[shortest].turnAroundTime - tempProcess[shortest].burstTime;
         tempProcess[shortest].responseTime = responseTimes[shortest];
 
-        System.out.println("Process ID: " + tempProcess[shortest].name);
-        System.out.println("Completion Time: " + tempProcess[shortest].completionTime);
-        System.out.println("Turnaround Time: " + tempProcess[shortest].turnAroundTime);
-        System.out.println("Waiting Time: " + tempProcess[shortest].waitingTime);
-        System.out.println("Response Time: " + tempProcess[shortest].responseTime);
-        System.out.println("");
+        JLabel pid = createHeaderLabel(""+tempProcess[shortest].id);
+                pid.setBounds(xDataOffset, yDataOffset, 80, 30);
+                DisplaySchedulingPanel.add(pid);
+
+                JLabel pname = createHeaderLabel(tempProcess[shortest].name);
+                pname.setBounds(xDataOffset + 100, yDataOffset, 150, 30);
+                DisplaySchedulingPanel.add(pname);
+
+                JLabel pat = createHeaderLabel(""+tempProcess[shortest].arrivalTime);
+                pat.setBounds(xDataOffset + 200, yDataOffset, 120, 30);
+               DisplaySchedulingPanel.add(pat);
+
+                JLabel pbt = createHeaderLabel(""+tempProcess[shortest].burstTime);
+                pbt.setBounds(xDataOffset + 300, yDataOffset, 120, 30);
+                DisplaySchedulingPanel.add(pbt);
+
+                JLabel pct = createHeaderLabel(""+tempProcess[shortest].completionTime);
+                pct.setBounds(xDataOffset + 400, yDataOffset, 120, 30);
+                DisplaySchedulingPanel.add(pct);
+
+                JLabel ptat = createHeaderLabel(""+tempProcess[shortest].turnAroundTime);
+                ptat.setBounds(xDataOffset + 500, yDataOffset, 120, 30);
+                DisplaySchedulingPanel.add(ptat);
+
+                JLabel pwt = createHeaderLabel(""+tempProcess[shortest].waitingTime);
+                pwt.setBounds(xDataOffset + 600, yDataOffset, 120, 30);
+                DisplaySchedulingPanel.add(pwt);
+
+                JLabel prt = createHeaderLabel(""+tempProcess[shortest].responseTime);
+                prt.setBounds(xDataOffset + 700, yDataOffset, 120, 30);
+                DisplaySchedulingPanel.add(prt);
+                
+                  yDataOffset += 40;
     }
+    
+        DisplaySchedulingPanel.setPreferredSize(new Dimension(620, yDataOffset + 20));
+
+        // Repaint the destroyPanel to reflect changes
+        DisplaySchedulingPanel.revalidate();
+        DisplaySchedulingPanel.repaint();
     }//GEN-LAST:event_sjfNonPremButtonActionPerformed
 
     private void fcfsPremButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fcfsPremButtonActionPerformed
@@ -1829,15 +2139,103 @@ MemoryManagement.setVisible(false);
     double avgWaitingTime = (double) totalWaitingTime / n;
     double avgTurnaroundTime = (double) totalTurnaroundTime / n;
 
-    // Display the results
-    System.out.println("Process\tCompletion Time\tWaiting Time\tTurnaround Time\tResponse Time");
-    for (Process p : process) {
-        if (p != null) { 
-            System.out.println(p.id + "\t" + p.completionTime + "\t" + p.waitingTime + "\t" + p.turnAroundTime + "\t" + p.responseTime);
+            DisplaySchedulingPanel.removeAll();
+        DisplaySchedulingPanel.setLayout(null); // Set layout to null for absolute positioning
+
+        // Define initial coordinates for headers and data
+        int xHeaderOffset = 10;
+        int yHeaderOffset = 10;
+        int xDataOffset = 10;
+        int yDataOffset = 40;
+
+        // Create header labels
+        JLabel id = createHeaderLabel("ID");
+        id.setBounds(xHeaderOffset, yHeaderOffset, 80, 30);
+        DisplaySchedulingPanel.add(id);
+
+        JLabel name = createHeaderLabel("Name");
+        name.setBounds(xHeaderOffset + 100, yHeaderOffset, 150, 30);
+        DisplaySchedulingPanel.add(name);
+
+        JLabel at = createHeaderLabel("AT");
+        at.setBounds(xHeaderOffset + 200, yHeaderOffset, 120, 30);
+       DisplaySchedulingPanel.add(at);
+       
+        JLabel bt = createHeaderLabel("BT");
+        bt.setBounds(xHeaderOffset + 300, yHeaderOffset, 120, 30);
+        DisplaySchedulingPanel.add(bt);
+        
+        JLabel ct = createHeaderLabel("CT");
+        ct.setBounds(xHeaderOffset + 400, yHeaderOffset, 120, 30);
+        DisplaySchedulingPanel.add(ct);
+        
+        JLabel tat = createHeaderLabel("TAT");
+        tat.setBounds(xHeaderOffset + 500, yHeaderOffset, 120, 30);
+        DisplaySchedulingPanel.add(tat);
+        
+        JLabel wt = createHeaderLabel("WT");
+        wt.setBounds(xHeaderOffset + 600, yHeaderOffset, 120, 30);
+        DisplaySchedulingPanel.add(wt);
+        
+        JLabel rt = createHeaderLabel("RT");
+        rt.setBounds(xHeaderOffset + 700, yHeaderOffset, 120, 30);
+        DisplaySchedulingPanel.add(rt);
+        JLabel awt = createHeaderLabel("AWT");
+        awt.setBounds(xHeaderOffset + 750, yHeaderOffset, 120, 30);
+        DisplaySchedulingPanel.add(awt);
+        JLabel atat = createHeaderLabel("ATAT");
+        atat.setBounds(xHeaderOffset + 800, yHeaderOffset, 120, 30);
+        DisplaySchedulingPanel.add(atat);
+        JLabel pawt = createHeaderLabel(""+avgWaitingTime);
+        pawt.setBounds(xDataOffset + 750, yDataOffset, 120, 30);
+        DisplaySchedulingPanel.add(pawt);
+        JLabel patat = createHeaderLabel(""+avgTurnaroundTime);
+        patat.setBounds(xDataOffset + 800, yDataOffset, 120, 30);
+        DisplaySchedulingPanel.add(patat);
+        for (Process p : process) {
+            if (p != null) { 
+                JLabel pid = createHeaderLabel(""+p.id);
+                pid.setBounds(xDataOffset, yDataOffset, 80, 30);
+                DisplaySchedulingPanel.add(pid);
+
+                JLabel pname = createHeaderLabel(p.name);
+                pname.setBounds(xDataOffset + 100, yDataOffset, 150, 30);
+                DisplaySchedulingPanel.add(pname);
+
+                JLabel pat = createHeaderLabel(""+p.arrivalTime);
+                pat.setBounds(xDataOffset + 200, yDataOffset, 120, 30);
+               DisplaySchedulingPanel.add(pat);
+
+                JLabel pbt = createHeaderLabel(""+p.burstTime);
+                pbt.setBounds(xDataOffset + 300, yDataOffset, 120, 30);
+                DisplaySchedulingPanel.add(pbt);
+
+                JLabel pct = createHeaderLabel(""+p.completionTime);
+                pct.setBounds(xDataOffset + 400, yDataOffset, 120, 30);
+                DisplaySchedulingPanel.add(pct);
+
+                JLabel ptat = createHeaderLabel(""+p.turnAroundTime);
+                ptat.setBounds(xDataOffset + 500, yDataOffset, 120, 30);
+                DisplaySchedulingPanel.add(ptat);
+
+                JLabel pwt = createHeaderLabel(""+p.waitingTime);
+                pwt.setBounds(xDataOffset + 600, yDataOffset, 120, 30);
+                DisplaySchedulingPanel.add(pwt);
+
+                JLabel prt = createHeaderLabel(""+p.responseTime);
+                prt.setBounds(xDataOffset + 700, yDataOffset, 120, 30);
+                DisplaySchedulingPanel.add(prt);
+                
+                  yDataOffset += 40;
+//                System.out.println(p.id + "\t" + p.completionTime + "\t" + p.waitingTime + "\t" + p.turnAroundTime + "\t" + p.responseTime);
+            }
         }
-    }
-    System.out.println("Average Waiting Time: " + avgWaitingTime);
-    System.out.println("Average Turnaround Time: " + avgTurnaroundTime);
+        
+        DisplaySchedulingPanel.setPreferredSize(new Dimension(620, yDataOffset + 20));
+
+        // Repaint the destroyPanel to reflect changes
+        DisplaySchedulingPanel.revalidate();
+        DisplaySchedulingPanel.repaint();
         // TODO add your handling code here:
     }//GEN-LAST:event_fcfsPremButtonActionPerformed
 
