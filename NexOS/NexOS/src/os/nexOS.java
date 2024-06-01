@@ -81,9 +81,9 @@ public class nexOS extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         IOProcessID = new javax.swing.JTextField();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        keyboardR = new javax.swing.JRadioButton();
+        mouseR = new javax.swing.JRadioButton();
+        printerR = new javax.swing.JRadioButton();
         jButton2 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         MemoryManagement = new javax.swing.JPanel();
@@ -323,38 +323,38 @@ public class nexOS extends javax.swing.JFrame {
         IOmanagmentPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, -1, -1));
         IOmanagmentPanel.add(IOProcessID, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 460, 260, 30));
 
-        io.add(jRadioButton2);
-        jRadioButton2.setFont(new java.awt.Font("SimSun", 1, 18)); // NOI18N
-        jRadioButton2.setForeground(new java.awt.Color(170, 171, 171));
-        jRadioButton2.setText("KEYBOARD");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        io.add(keyboardR);
+        keyboardR.setFont(new java.awt.Font("SimSun", 1, 18)); // NOI18N
+        keyboardR.setForeground(new java.awt.Color(170, 171, 171));
+        keyboardR.setText("KEYBOARD");
+        keyboardR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                keyboardRActionPerformed(evt);
             }
         });
-        IOmanagmentPanel.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 400, -1, -1));
+        IOmanagmentPanel.add(keyboardR, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 400, -1, -1));
 
-        io.add(jRadioButton3);
-        jRadioButton3.setFont(new java.awt.Font("SimSun", 1, 18)); // NOI18N
-        jRadioButton3.setForeground(new java.awt.Color(170, 171, 171));
-        jRadioButton3.setText("MOUSE");
-        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
+        io.add(mouseR);
+        mouseR.setFont(new java.awt.Font("SimSun", 1, 18)); // NOI18N
+        mouseR.setForeground(new java.awt.Color(170, 171, 171));
+        mouseR.setText("MOUSE");
+        mouseR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton3ActionPerformed(evt);
+                mouseRActionPerformed(evt);
             }
         });
-        IOmanagmentPanel.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 400, -1, -1));
+        IOmanagmentPanel.add(mouseR, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 400, -1, -1));
 
-        io.add(jRadioButton1);
-        jRadioButton1.setFont(new java.awt.Font("SimSun", 1, 18)); // NOI18N
-        jRadioButton1.setForeground(new java.awt.Color(170, 171, 171));
-        jRadioButton1.setText("PRINTER");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        io.add(printerR);
+        printerR.setFont(new java.awt.Font("SimSun", 1, 18)); // NOI18N
+        printerR.setForeground(new java.awt.Color(170, 171, 171));
+        printerR.setText("PRINTER");
+        printerR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                printerRActionPerformed(evt);
             }
         });
-        IOmanagmentPanel.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 400, -1, -1));
+        IOmanagmentPanel.add(printerR, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 400, -1, -1));
 
         jButton2.setBackground(new java.awt.Color(22, 41, 42));
         jButton2.setFont(new java.awt.Font("SimSun", 1, 14)); // NOI18N
@@ -2381,29 +2381,47 @@ MemoryManagement.setVisible(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_FramesizeActionPerformed
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void printerRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printerRActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_printerRActionPerformed
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+    private void keyboardRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keyboardRActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+    }//GEN-LAST:event_keyboardRActionPerformed
 
-    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
+    private void mouseRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mouseRActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton3ActionPerformed
+    }//GEN-LAST:event_mouseRActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int id;
+        String device;
+        if(!mouseR.isSelected()&&!keyboardR.isSelected()&&!printerR.isSelected()){
+            JOptionPane.showMessageDialog(null,"Please Select an I/O Device.");
+            return;
+        }
         try{
             id = Integer.parseInt(IOProcessID.getText());
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,"Please Enter Valid ID in numbers only.");
             return;
         }
+        if(mouseR.isSelected()){
+            device = "Mouse";
+        }else if(keyboardR.isSelected()){
+            device = "Keyboard";
+        }else{
+            device = "Printer";
+        }
         boolean findId = false;
         for(int i=0;i<n;i++){
             if(id == process[i].id){
+                if(process[id].status == "Blocked"){
+                    JOptionPane.showMessageDialog(null,"Process Already Busy with an interrupt");
+                    return;
+                }
+                process[i].status = "Blocked";
+                JOptionPane.showMessageDialog(null,"Process: "+process[i].name+" with ID: "+process[i].id+" has I/O interrupt of "+device);
                 findId = true;
                 break;
             }
@@ -2412,6 +2430,7 @@ MemoryManagement.setVisible(false);
             JOptionPane.showMessageDialog(null,"ID NOT FOUND.");
             return;
         }
+        IOProcessID.setText("");
         
 
         // TODO add your handling code here:
@@ -2528,14 +2547,14 @@ private int getPriorityValue(String priority) {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JLabel keyboard;
+    private javax.swing.JRadioButton keyboardR;
     private javax.swing.JButton maxProcessButton;
     private javax.swing.JTextField maxProcessField;
     private javax.swing.JLabel mouse;
+    private javax.swing.JRadioButton mouseR;
     private javax.swing.JLabel printer;
+    private javax.swing.JRadioButton printerR;
     private javax.swing.JButton processButton;
     private javax.swing.JTextField referstring;
     private javax.swing.JButton resumeButton;
