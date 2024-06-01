@@ -89,7 +89,7 @@ public class nexOS extends javax.swing.JFrame {
         Memorysize = new javax.swing.JTextField();
         referstring = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        ApplyFifo = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         Framesize = new javax.swing.JTextField();
@@ -375,15 +375,15 @@ public class nexOS extends javax.swing.JFrame {
         jLabel6.setText("Enter reference string");
         MemoryManagement.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, 180, -1));
 
-        jButton2.setBackground(new java.awt.Color(22, 41, 42));
-        jButton2.setForeground(new java.awt.Color(170, 171, 171));
-        jButton2.setText("Submit");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        ApplyFifo.setBackground(new java.awt.Color(22, 41, 42));
+        ApplyFifo.setForeground(new java.awt.Color(170, 171, 171));
+        ApplyFifo.setText("Submit");
+        ApplyFifo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                ApplyFifoActionPerformed(evt);
             }
         });
-        MemoryManagement.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 320, -1, -1));
+        MemoryManagement.add(ApplyFifo, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 320, -1, -1));
 
         jLabel18.setFont(new java.awt.Font("SimSun", 1, 24)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(170, 171, 171));
@@ -1851,7 +1851,7 @@ MemoryManagement.setVisible(false);
         MainPanel.setVisible(false);
     }//GEN-LAST:event_jButton8ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void ApplyFifoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApplyFifoActionPerformed
       FIFO.setVisible(true);
         String pagesStr = referstring.getText().trim(); // Example input from ;
         int frameSize = Integer.parseInt(Framesize.getText().trim()); // Example input from ;
@@ -1902,8 +1902,8 @@ MemoryManagement.setVisible(false);
         // Output the total number of page faults and page hits
         System.out.println("\nTotal Page Faults: " + pageFaults);
         System.out.println("Total Page Hits: " + pageHits);
-    
-    }//GEN-LAST:event_jButton2ActionPerformed
+    //hello friends
+    }//GEN-LAST:event_ApplyFifoActionPerformed
 
     private void MemorysizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MemorysizeActionPerformed
         // TODO add your handling code here:
@@ -1970,6 +1970,7 @@ private int getPriorityValue(String priority) {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ApplyFifo;
     private javax.swing.JPanel DisplaySchedulingPanel;
     private javax.swing.JPanel FIFO;
     private javax.swing.JTextField Framesize;
@@ -2002,7 +2003,6 @@ private int getPriorityValue(String priority) {
     private javax.swing.JLabel goBack2;
     private javax.swing.JLabel goBack3;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton8;
