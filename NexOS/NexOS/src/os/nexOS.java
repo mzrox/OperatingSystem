@@ -1625,68 +1625,59 @@ MemoryManagement.setVisible(false);
     }//GEN-LAST:event_rrButtonActionPerformed
 
     private void sjfNonPremButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sjfNonPremButtonActionPerformed
- Process[] tempProcess = process.clone(); // Make a clone to avoid modifying original array
+     // Assume tempProcess array is defined and populated
+    Process[] tempProcess = process;
 
-    int n = tempProcess.length; // Number of processes
-
-    // Arrays to store remaining burst time, response times, and completion status
     int[] remainingBurstTime = new int[n];
+    boolean[] isFirstResponse = new boolean[n];
     int[] responseTimes = new int[n];
-    boolean[] completed = new boolean[n];
-
-    // Initialize remaining burst time and completion status
+    
     for (int i = 0; i < n; i++) {
         remainingBurstTime[i] = tempProcess[i].burstTime;
-        responseTimes[i] = -1; // -1 indicates response time not yet calculated
-        completed[i] = false;
+        isFirstResponse[i] = true;
     }
 
+    int completed = 0;
     int currentTime = 0;
-    int completedCount = 0;
 
-    while (completedCount != n) {
+    while (completed != n) {
         int shortest = -1;
         int minBurstTime = Integer.MAX_VALUE;
+        boolean foundProcess = false;
 
-        // Find the process with the shortest remaining burst time
         for (int i = 0; i < n; i++) {
-            if (!completed[i] && tempProcess[i].arrivalTime <= currentTime && remainingBurstTime[i] < minBurstTime) {
-                minBurstTime = remainingBurstTime[i];
+            if (tempProcess[i].arrivalTime <= currentTime && remainingBurstTime[i] > 0 && tempProcess[i].burstTime < minBurstTime) {
+                minBurstTime = tempProcess[i].burstTime;
                 shortest = i;
+                foundProcess = true;
             }
         }
 
-        if (shortest == -1) {
+        if (!foundProcess) {
             currentTime++;
             continue;
         }
 
-        // Update response time if it's the first time the process is selected
-        if (responseTimes[shortest] == -1) {
+        if (isFirstResponse[shortest]) {
             responseTimes[shortest] = currentTime - tempProcess[shortest].arrivalTime;
+            isFirstResponse[shortest] = false;
         }
 
-        // Decrement remaining burst time
-        remainingBurstTime[shortest]--;
-        currentTime++;
+        currentTime += tempProcess[shortest].burstTime;
+        remainingBurstTime[shortest] = 0;
+        completed++;
 
-        // Check if the process is completed
-        if (remainingBurstTime[shortest] == 0) {
-            completedCount++;
-            completed[shortest] = true;
-            tempProcess[shortest].completionTime = currentTime;
-            tempProcess[shortest].turnAroundTime = tempProcess[shortest].completionTime - tempProcess[shortest].arrivalTime;
-            tempProcess[shortest].waitingTime = tempProcess[shortest].turnAroundTime - tempProcess[shortest].burstTime;
-            tempProcess[shortest].responseTime = responseTimes[shortest];
+        tempProcess[shortest].completionTime = currentTime;
+        tempProcess[shortest].turnAroundTime = tempProcess[shortest].completionTime - tempProcess[shortest].arrivalTime;
+        tempProcess[shortest].waitingTime = tempProcess[shortest].turnAroundTime - tempProcess[shortest].burstTime;
+        tempProcess[shortest].responseTime = responseTimes[shortest];
 
-            // Print process details
-            System.out.println("Process ID: " + tempProcess[shortest].name);
-            System.out.println("Completion Time: " + tempProcess[shortest].completionTime);
-            System.out.println("Turnaround Time: " + tempProcess[shortest].turnAroundTime);
-            System.out.println("Waiting Time: " + tempProcess[shortest].waitingTime);
-            System.out.println("Response Time: " + tempProcess[shortest].responseTime);
-            System.out.println("");
-        }
+        System.out.println("Process ID: " + tempProcess[shortest].name);
+        System.out.println("Completion Time: " + tempProcess[shortest].completionTime);
+        System.out.println("Turnaround Time: " + tempProcess[shortest].turnAroundTime);
+        System.out.println("Waiting Time: " + tempProcess[shortest].waitingTime);
+        System.out.println("Response Time: " + tempProcess[shortest].responseTime);
+        System.out.println("");
     }
     }//GEN-LAST:event_sjfNonPremButtonActionPerformed
 
