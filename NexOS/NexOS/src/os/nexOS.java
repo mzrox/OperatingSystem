@@ -2416,8 +2416,12 @@ MemoryManagement.setVisible(false);
         boolean findId = false;
         for(int i=0;i<n;i++){
             if(id == process[i].id){
-                if(process[id].status == "Blocked"){
+                if(process[id].status.equals("Blocked")){
                     JOptionPane.showMessageDialog(null,"Process Already Busy with an interrupt");
+                    return;
+                }
+                if(!process[id].status.equals("Running")){
+                    JOptionPane.showMessageDialog(null,"Process is Not Running.\n Status: "+process[i].status);
                     return;
                 }
                 process[i].status = "Blocked";
