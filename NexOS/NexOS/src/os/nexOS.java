@@ -24,7 +24,7 @@ import os.Process;
 
 public class nexOS extends javax.swing.JFrame {
     private Process[] process = new Process[100];
-    public int n;
+    public int n=0;
 
     public nexOS() {
         
@@ -75,16 +75,22 @@ public class nexOS extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         IOmanagmentPanel = new javax.swing.JPanel();
         goBack3 = new javax.swing.JLabel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        ioIn = new javax.swing.JPanel();
         mouse = new javax.swing.JLabel();
         keyboard = new javax.swing.JLabel();
         printer = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        IOProcessID = new javax.swing.JTextField();
         keyboardR = new javax.swing.JRadioButton();
         mouseR = new javax.swing.JRadioButton();
         printerR = new javax.swing.JRadioButton();
+        IOProcessID = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        ioOut = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        IOProcessID1 = new javax.swing.JTextField();
+        jButton5 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         MemoryManagement = new javax.swing.JPanel();
         FIFOScroll = new javax.swing.JScrollPane();
@@ -303,25 +309,31 @@ public class nexOS extends javax.swing.JFrame {
         });
         IOmanagmentPanel.add(goBack3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 220, 40));
 
+        jTabbedPane1.setBackground(new java.awt.Color(22, 41, 42));
+        jTabbedPane1.setForeground(new java.awt.Color(170, 171, 171));
+        jTabbedPane1.setFont(new java.awt.Font("SimSun", 1, 14)); // NOI18N
+
+        ioIn.setBackground(new java.awt.Color(22, 41, 42));
+        ioIn.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         mouse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mouse.png"))); // NOI18N
-        IOmanagmentPanel.add(mouse, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 240, 170, 129));
+        ioIn.add(mouse, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 80, -1, 129));
 
         keyboard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/keyboard.png"))); // NOI18N
-        IOmanagmentPanel.add(keyboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 240, 170, 129));
+        ioIn.add(keyboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 80, -1, 129));
 
         printer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/printer.png"))); // NOI18N
-        IOmanagmentPanel.add(printer, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 170, 129));
+        ioIn.add(printer, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, -1, -1));
 
         jLabel13.setFont(new java.awt.Font("SimSun", 1, 24)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(170, 171, 171));
         jLabel13.setText("Process ID:");
-        IOmanagmentPanel.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 460, -1, -1));
+        ioIn.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("SimSun", 1, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(170, 171, 171));
         jLabel8.setText("SELECT THE I/O INTERRUPT");
-        IOmanagmentPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, -1, -1));
-        IOmanagmentPanel.add(IOProcessID, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 460, 260, 30));
+        ioIn.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, -1, -1));
 
         io.add(keyboardR);
         keyboardR.setFont(new java.awt.Font("SimSun", 1, 18)); // NOI18N
@@ -332,7 +344,7 @@ public class nexOS extends javax.swing.JFrame {
                 keyboardRActionPerformed(evt);
             }
         });
-        IOmanagmentPanel.add(keyboardR, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 400, -1, -1));
+        ioIn.add(keyboardR, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 240, -1, -1));
 
         io.add(mouseR);
         mouseR.setFont(new java.awt.Font("SimSun", 1, 18)); // NOI18N
@@ -343,7 +355,7 @@ public class nexOS extends javax.swing.JFrame {
                 mouseRActionPerformed(evt);
             }
         });
-        IOmanagmentPanel.add(mouseR, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 400, -1, -1));
+        ioIn.add(mouseR, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 240, -1, -1));
 
         io.add(printerR);
         printerR.setFont(new java.awt.Font("SimSun", 1, 18)); // NOI18N
@@ -354,7 +366,8 @@ public class nexOS extends javax.swing.JFrame {
                 printerRActionPerformed(evt);
             }
         });
-        IOmanagmentPanel.add(printerR, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 400, -1, -1));
+        ioIn.add(printerR, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, -1, -1));
+        ioIn.add(IOProcessID, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 290, 260, 30));
 
         jButton2.setBackground(new java.awt.Color(22, 41, 42));
         jButton2.setFont(new java.awt.Font("SimSun", 1, 14)); // NOI18N
@@ -365,7 +378,33 @@ public class nexOS extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        IOmanagmentPanel.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 460, 100, 30));
+        ioIn.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 290, 100, 30));
+
+        jTabbedPane1.addTab("INTERRUPT IN", ioIn);
+
+        ioOut.setBackground(new java.awt.Color(22, 41, 42));
+        ioOut.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel14.setFont(new java.awt.Font("SimSun", 1, 24)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(170, 171, 171));
+        jLabel14.setText("Process ID:");
+        ioOut.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, -1, -1));
+        ioOut.add(IOProcessID1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 140, 260, 30));
+
+        jButton5.setBackground(new java.awt.Color(22, 41, 42));
+        jButton5.setFont(new java.awt.Font("SimSun", 1, 14)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(170, 171, 171));
+        jButton5.setText("SUBMIT");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        ioOut.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 210, 100, 30));
+
+        jTabbedPane1.addTab("INTERRUPT OUT", ioOut);
+
+        IOmanagmentPanel.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 880, 370));
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/IO-MANAGEMENT.png"))); // NOI18N
         IOmanagmentPanel.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 540));
@@ -750,7 +789,8 @@ private class SuspendActionListener implements ActionListener {
     }//GEN-LAST:event_changePriorityButtonActionPerformed
 
     private void dispatchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dispatchButtonActionPerformed
-      // Clear existing components from suspendPanel
+      
+        changePriorityPanel.setVisible(false);// Clear existing components from suspendPanel
         suspendPanel.removeAll();
         suspendPanel.setLayout(null); // Set layout to null for absolute positioning
 
@@ -853,6 +893,7 @@ private class SuspendActionListener implements ActionListener {
         dispatchButtonActionPerformed(null); // Update the displayed list after suspension
     }
     private void wakeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wakeButtonActionPerformed
+        changePriorityPanel.setVisible(false);
         suspendPanel.removeAll();
         suspendPanel.setLayout(null); // Set layout to null for absolute positioning
 
@@ -954,6 +995,7 @@ private class SuspendActionListener implements ActionListener {
         wakeButtonActionPerformed(null); // Update the displayed list after suspension
     }
     private void blockButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blockButtonActionPerformed
+        changePriorityPanel.setVisible(false);
         suspendPanel.removeAll();
         suspendPanel.setLayout(null); // Set layout to null for absolute positioning
 
@@ -1055,7 +1097,7 @@ private class SuspendActionListener implements ActionListener {
         blockButtonActionPerformed(null); // Update the displayed list after suspension
     }
     private void resumeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resumeButtonActionPerformed
-        // Clear existing components from suspendPanel
+        changePriorityPanel.setVisible(false);// Clear existing components from suspendPanel
         suspendPanel.removeAll();
         suspendPanel.setLayout(null); // Set layout to null for absolute positioning
 
@@ -1139,7 +1181,7 @@ private class SuspendActionListener implements ActionListener {
     }//GEN-LAST:event_resumeButtonActionPerformed
 
     private void suspendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suspendButtonActionPerformed
-        // Clear existing components from suspendPanel
+        changePriorityPanel.setVisible(false);// Clear existing components from suspendPanel
         suspendPanel.removeAll();
         suspendPanel.setLayout(null); // Set layout to null for absolute positioning
 
@@ -1222,7 +1264,8 @@ private class SuspendActionListener implements ActionListener {
     }//GEN-LAST:event_suspendButtonActionPerformed
 
     private void destroyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_destroyButtonActionPerformed
-        // Clear existing components from destroyPanel
+        
+        changePriorityPanel.setVisible(false);// Clear existing components from destroyPanel
         destroyPanel.removeAll();
         destroyPanel.setLayout(null); // Set layout to null for absolute positioning
 
@@ -1304,7 +1347,8 @@ private class SuspendActionListener implements ActionListener {
     }//GEN-LAST:event_destroyButtonActionPerformed
 
     private void processButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processButtonActionPerformed
-         displayPPanel.removeAll();
+        changePriorityPanel.setVisible(false);
+        displayPPanel.removeAll();
         displayPPanel.setLayout(null); // Set layout to null for absolute positioning
 
         // Define initial coordinates for headers and data
@@ -1574,7 +1618,11 @@ MemoryManagement.setVisible(false);
     }//GEN-LAST:event_goBack2MouseClicked
 
     private void fcfsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fcfsButtonActionPerformed
-            // Initialize variables
+        if(n == 0){
+            JOptionPane.showMessageDialog(null, "NO PROCESS CREATED.");
+            return;
+        }
+        // Initialize variables
         int currentTime = 0;
         int totalWaitingTime = 0;
         int totalTurnaroundTime = 0;
@@ -1721,7 +1769,11 @@ MemoryManagement.setVisible(false);
     }//GEN-LAST:event_fcfsButtonActionPerformed
 
     private void sjfButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sjfButtonActionPerformed
-            // Assume tempProcess array is defined and populated
+        if(n == 0){
+            JOptionPane.showMessageDialog(null, "NO PROCESS CREATED.");
+            return;
+        }
+        // Assume tempProcess array is defined and populated
     Process[] tempProcess = process;
 
     int[] remainingBurstTime = new int[n];
@@ -1853,7 +1905,11 @@ MemoryManagement.setVisible(false);
     }//GEN-LAST:event_sjfButtonActionPerformed
 
     private void rrButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rrButtonActionPerformed
-   String input = JOptionPane.showInputDialog("Enter the time quantum:");
+        if(n == 0){
+            JOptionPane.showMessageDialog(null, "NO PROCESS CREATED.");
+            return;
+        }
+        String input = JOptionPane.showInputDialog("Enter the time quantum:");
 
     int quantum;
     try {
@@ -2010,7 +2066,10 @@ MemoryManagement.setVisible(false);
     }//GEN-LAST:event_rrButtonActionPerformed
 
     private void sjfNonPremButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sjfNonPremButtonActionPerformed
-     // Assume tempProcess array is defined and populated
+    if(n == 0){
+            JOptionPane.showMessageDialog(null, "NO PROCESS CREATED.");
+            return;
+        }     // Assume tempProcess array is defined and populated
     Process[] tempProcess = process;
 
     int[] remainingBurstTime = new int[n];
@@ -2140,6 +2199,10 @@ MemoryManagement.setVisible(false);
     }//GEN-LAST:event_sjfNonPremButtonActionPerformed
 
     private void fcfsPremButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fcfsPremButtonActionPerformed
+        if(n == 0){
+            JOptionPane.showMessageDialog(null, "NO PROCESS CREATED.");
+            return;
+        }
     int currentTime = 0;
     int totalWaitingTime = 0;
     int totalTurnaroundTime = 0;
@@ -2290,6 +2353,8 @@ MemoryManagement.setVisible(false);
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         IOmanagmentPanel.setVisible(true);
+        ioOut.setVisible(true);
+        ioIn.setVisible(true);
         MainPanel.setVisible(false);
     }//GEN-LAST:event_jButton8ActionPerformed
 
@@ -2445,6 +2510,38 @@ MemoryManagement.setVisible(false);
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        int id = 0;
+        try{
+           id = Integer.parseInt(IOProcessID1.getText()); 
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Please Enter Valid ID. (In numbers only)");
+            return;
+        }
+        boolean findId = false;
+        for(int i=0;i<n;i++){
+            if(id == process[i].id){
+                if(process[i].status.equals("Blocked")){
+                    process[i].status = "Ready";
+                    JOptionPane.showMessageDialog(null,"Process: "+process[i].name+" with ID: "+process[i].id+" has left the I/O Operation "+"\n Status: "+process[i].status);
+                    return;
+                }
+                if(!process[i].status.equals("Running")){
+                    JOptionPane.showMessageDialog(null,"Process is Not Running.\n Status: "+process[i].status);
+                    return;
+                }
+                findId = true;
+                break;
+            }
+        }
+        if(findId == false){
+            JOptionPane.showMessageDialog(null,"ID NOT FOUND.");
+            return;
+        }
+        IOProcessID1.setText("");
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
 private int comparePriority(String priority1, String priority2) {
     // Assigning numerical values to priorities
     int priorityValue1 = getPriorityValue(priority1);
@@ -2509,6 +2606,7 @@ private int getPriorityValue(String priority) {
     private javax.swing.JScrollPane FIFOScroll;
     private javax.swing.JTextField Framesize;
     private javax.swing.JTextField IOProcessID;
+    private javax.swing.JTextField IOProcessID1;
     private javax.swing.JPanel IOmanagmentPanel;
     private javax.swing.JPanel MainPanel;
     private javax.swing.JButton MemoryManag;
@@ -2538,16 +2636,20 @@ private int getPriorityValue(String priority) {
     private javax.swing.JLabel goBack2;
     private javax.swing.JLabel goBack3;
     private javax.swing.ButtonGroup io;
+    private javax.swing.JPanel ioIn;
+    private javax.swing.JPanel ioOut;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
@@ -2557,6 +2659,7 @@ private int getPriorityValue(String priority) {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel keyboard;
     private javax.swing.JRadioButton keyboardR;
     private javax.swing.JButton maxProcessButton;
