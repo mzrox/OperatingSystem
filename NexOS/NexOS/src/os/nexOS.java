@@ -1552,7 +1552,13 @@ public class CustomProcessInputDialog extends JDialog implements ActionListener 
     }
 }
     private void maxProcessButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maxProcessButtonActionPerformed
-         n = Integer.parseInt(maxProcessField.getText());
+        try{
+            n = Integer.parseInt(maxProcessField.getText());
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(createPanel, "Invalid Input.\n For Number of Processes: "+e.getMessage());
+            return;
+        }
+        
          
          for (int i = 0; i < n; i++) {
         CustomProcessInputDialog dialog = new CustomProcessInputDialog((Frame) SwingUtilities.getWindowAncestor(createPanel));
