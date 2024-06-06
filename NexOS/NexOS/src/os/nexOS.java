@@ -1,4 +1,6 @@
 package os;
+import java.io.*;
+import java.net.*;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -40,7 +42,7 @@ public class nexOS extends javax.swing.JFrame {
         MemoryManagement.setVisible(false);
         SchedulingPanel.setVisible(false);
         IOmanagmentPanel.setVisible(false);
-        
+        OtherOperationPanel.setVisible(false);
         
     }
 
@@ -73,6 +75,19 @@ public class nexOS extends javax.swing.JFrame {
         destroyScroll = new javax.swing.JScrollPane();
         destroyPanel = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
+        OtherOperationPanel = new javax.swing.JPanel();
+        goBack4 = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
+        SocketPanel = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jButton7 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
+        clientMessage = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jButton10 = new javax.swing.JButton();
+        clientMessageField = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
         IOmanagmentPanel = new javax.swing.JPanel();
         goBack3 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
@@ -299,6 +314,78 @@ public class nexOS extends javax.swing.JFrame {
 
         getContentPane().add(ProcessPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 540));
 
+        OtherOperationPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        goBack4.setText("                                                            ");
+        goBack4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                goBack4MouseClicked(evt);
+            }
+        });
+        OtherOperationPanel.add(goBack4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 220, 40));
+
+        jButton6.setText("SOCKET PROGRAMMING");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        OtherOperationPanel.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, -1, -1));
+
+        SocketPanel.setBackground(new java.awt.Color(22, 41, 42));
+        SocketPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel3.setBackground(new java.awt.Color(22, 41, 30));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton7.setText("Start");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        jButton9.setText("Stop");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, -1, -1));
+
+        clientMessage.setFont(new java.awt.Font("SimSun", 0, 18)); // NOI18N
+        clientMessage.setForeground(new java.awt.Color(170, 171, 171));
+        jPanel3.add(clientMessage, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 370, 140));
+
+        jLabel16.setFont(new java.awt.Font("SimSun", 1, 18)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(170, 171, 171));
+        jLabel16.setText("Clients Message:");
+        jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
+
+        SocketPanel.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, 410, 360));
+
+        jPanel2.setBackground(new java.awt.Color(22, 41, 30));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton10.setText("Send");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, -1, -1));
+        jPanel2.add(clientMessageField, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 260, -1));
+
+        SocketPanel.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 410, 360));
+
+        OtherOperationPanel.add(SocketPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 890, 370));
+
+        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/IO-MANAGEMENT.png"))); // NOI18N
+        OtherOperationPanel.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 540));
+
+        getContentPane().add(OtherOperationPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 540));
+
         IOmanagmentPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         goBack3.setText("                                                            ");
@@ -312,6 +399,11 @@ public class nexOS extends javax.swing.JFrame {
         jTabbedPane1.setBackground(new java.awt.Color(22, 41, 42));
         jTabbedPane1.setForeground(new java.awt.Color(170, 171, 171));
         jTabbedPane1.setFont(new java.awt.Font("SimSun", 1, 14)); // NOI18N
+        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane1MouseClicked(evt);
+            }
+        });
 
         ioIn.setBackground(new java.awt.Color(22, 41, 42));
         ioIn.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -433,25 +525,25 @@ public class nexOS extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("SimSun", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(170, 171, 171));
         jLabel4.setText("Enter memory size: ");
-        MemoryManagement.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, 180, 40));
+        MemoryManagement.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, 200, 40));
 
         jLabel5.setFont(new java.awt.Font("SimSun", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(170, 171, 171));
         jLabel5.setText("Frame Size:");
-        MemoryManagement.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 323, 110, -1));
+        MemoryManagement.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 323, 130, -1));
 
         jLabel6.setFont(new java.awt.Font("SimSun", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(170, 171, 171));
         jLabel6.setText("Enter reference string:");
-        MemoryManagement.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 390, 230, -1));
-        MemoryManagement.add(referstring, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 390, 140, 30));
+        MemoryManagement.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 390, 240, -1));
+        MemoryManagement.add(referstring, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 387, 140, 30));
 
         Framesize.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FramesizeActionPerformed(evt);
             }
         });
-        MemoryManagement.add(Framesize, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 323, 140, 30));
+        MemoryManagement.add(Framesize, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 323, 140, 30));
 
         Memorysize.setFont(new java.awt.Font("SimSun", 1, 12)); // NOI18N
         Memorysize.setForeground(new java.awt.Color(170, 171, 171));
@@ -460,12 +552,12 @@ public class nexOS extends javax.swing.JFrame {
                 MemorysizeActionPerformed(evt);
             }
         });
-        MemoryManagement.add(Memorysize, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, 140, 30));
+        MemoryManagement.add(Memorysize, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, 140, 30));
 
         jLabel18.setFont(new java.awt.Font("SimSun", 1, 24)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(170, 171, 171));
-        jLabel18.setText("LRU INPUT");
-        MemoryManagement.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 120, 40));
+        jLabel18.setText("FIFO INPUT");
+        MemoryManagement.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 140, 40));
 
         ApplyFifo.setBackground(new java.awt.Color(22, 41, 42));
         ApplyFifo.setFont(new java.awt.Font("SimSun", 1, 12)); // NOI18N
@@ -564,6 +656,11 @@ public class nexOS extends javax.swing.JFrame {
         jButton3.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
         jButton3.setForeground(new java.awt.Color(170, 171, 171));
         jButton3.setText("Other operations");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         MainPanel.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 450, 160, 40));
 
         MemoryManag.setBackground(new java.awt.Color(22, 41, 42));
@@ -2359,8 +2456,6 @@ MemoryManagement.setVisible(false);
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         IOmanagmentPanel.setVisible(true);
-        ioOut.setVisible(true);
-        ioIn.setVisible(true);
         MainPanel.setVisible(false);
     }//GEN-LAST:event_jButton8ActionPerformed
 
@@ -2548,6 +2643,113 @@ MemoryManagement.setVisible(false);
         IOProcessID1.setText("");
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTabbedPane1MouseClicked
+
+    private void goBack4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goBack4MouseClicked
+        OtherOperationPanel.setVisible(false);
+        MainPanel.setVisible(true);
+        
+// TODO add your handling code here:
+    }//GEN-LAST:event_goBack4MouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        MainPanel.setVisible(false);
+        OtherOperationPanel.setVisible(true);
+        SocketPanel.setVisible(false);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        SocketPanel.setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
+private Thread serverThread;
+private volatile boolean running;
+
+private void startServer(Boolean var) {
+    if (var) {
+        running = true;
+        serverThread = new Thread(this::Server);
+        serverThread.start();
+    } else {
+        running = false;
+        if (serverThread != null) {
+            try {
+                serverThread.join();
+            } catch (InterruptedException e) {
+                JOptionPane.showMessageDialog(null, "Error stopping server thread. " + e);
+            }
+        }
+    }
+}
+
+private void Server() {
+    ServerSocket serverSocket = null;
+    try {
+        serverSocket = new ServerSocket(1234);
+        JOptionPane.showMessageDialog(null, "Server started on port 1234.");
+        
+        while (running) {
+            try {
+                serverSocket.setSoTimeout(1000);  // Set timeout for accept() method to check running flag periodically
+                Socket s = serverSocket.accept();
+                DataInputStream dt = new DataInputStream(s.getInputStream());
+                String message = dt.readUTF();
+                clientMessage.setText("" + message);
+                s.close();  // Close the client socket after handling the message
+            } catch (SocketTimeoutException e) {
+                // Timeout to check the running condition
+            } catch (IOException e) {
+                if (!running) {
+                    JOptionPane.showMessageDialog(null, "Server stopped.");
+                    break;
+                }
+                JOptionPane.showMessageDialog(null, "ERROR CONNECTING. " + e);
+            }
+        }
+    } catch (IOException e) {
+        JOptionPane.showMessageDialog(null, "Could not start server. " + e);
+    } finally {
+        try {
+            if (serverSocket != null && !serverSocket.isClosed()) {
+                serverSocket.close();
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error closing server socket. " + e);
+        }
+    }
+}
+
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        startServer(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        startServer(false);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton9ActionPerformed
+private void Client(String message) {
+    try (Socket socket = new Socket("localhost", 1234);
+         DataOutputStream dt = new DataOutputStream(socket.getOutputStream())) {
+        dt.writeUTF(message);
+        
+    } catch (IOException e) {
+        JOptionPane.showMessageDialog(null, "Error connecting to server. " + e);
+    }
+}
+
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        String message = clientMessageField.getText();
+        Client(message);
+// TODO add your handling code here:
+            
+    }//GEN-LAST:event_jButton10ActionPerformed
 private int comparePriority(String priority1, String priority2) {
     // Assigning numerical values to priorities
     int priorityValue1 = getPriorityValue(priority1);
@@ -2618,14 +2820,18 @@ private int getPriorityValue(String priority) {
     private javax.swing.JButton MemoryManag;
     private javax.swing.JPanel MemoryManagement;
     private javax.swing.JTextField Memorysize;
+    private javax.swing.JPanel OtherOperationPanel;
     private javax.swing.JButton ProcessManagementButton;
     private javax.swing.JPanel ProcessPanel;
     private javax.swing.JPanel SchedulingPanel;
+    private javax.swing.JPanel SocketPanel;
     private javax.swing.JButton blockButton;
     private javax.swing.JButton changePriorityButton;
     private javax.swing.JTextField changePriorityPId;
     private javax.swing.JComboBox<String> changePriorityPPriority;
     private javax.swing.JPanel changePriorityPanel;
+    private javax.swing.JLabel clientMessage;
+    private javax.swing.JTextField clientMessageField;
     private javax.swing.JPanel createPanel;
     private javax.swing.JPanel createPanel2;
     private javax.swing.JPanel createPanel3;
@@ -2641,15 +2847,20 @@ private int getPriorityValue(String priority) {
     private javax.swing.JLabel goBack1;
     private javax.swing.JLabel goBack2;
     private javax.swing.JLabel goBack3;
+    private javax.swing.JLabel goBack4;
     private javax.swing.ButtonGroup io;
     private javax.swing.JPanel ioIn;
     private javax.swing.JPanel ioOut;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2657,14 +2868,18 @@ private int getPriorityValue(String priority) {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel keyboard;
     private javax.swing.JRadioButton keyboardR;
