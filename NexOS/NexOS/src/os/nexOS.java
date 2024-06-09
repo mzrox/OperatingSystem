@@ -1,7 +1,7 @@
 package os;
 import java.io.*;
 import java.net.*;
-
+ 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.Queue;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -117,6 +118,7 @@ public class nexOS extends javax.swing.JFrame {
         referstring = new javax.swing.JTextField();
         Framesize = new javax.swing.JTextField();
         Memorysize = new javax.swing.JTextField();
+        ApplyLru = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
         ApplyFifo = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
@@ -554,21 +556,32 @@ public class nexOS extends javax.swing.JFrame {
         });
         MemoryManagement.add(Memorysize, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, 140, 30));
 
+        ApplyLru.setBackground(new java.awt.Color(22, 41, 42));
+        ApplyLru.setFont(new java.awt.Font("SimSun", 1, 12)); // NOI18N
+        ApplyLru.setForeground(new java.awt.Color(170, 171, 171));
+        ApplyLru.setText("LRU");
+        ApplyLru.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ApplyLruActionPerformed(evt);
+            }
+        });
+        MemoryManagement.add(ApplyLru, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 460, -1, -1));
+
         jLabel18.setFont(new java.awt.Font("SimSun", 1, 24)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(170, 171, 171));
-        jLabel18.setText("FIFO INPUT");
-        MemoryManagement.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 140, 40));
+        jLabel18.setText("INPUT");
+        MemoryManagement.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 70, 40));
 
         ApplyFifo.setBackground(new java.awt.Color(22, 41, 42));
         ApplyFifo.setFont(new java.awt.Font("SimSun", 1, 12)); // NOI18N
         ApplyFifo.setForeground(new java.awt.Color(170, 171, 171));
-        ApplyFifo.setText("Submit");
+        ApplyFifo.setText("FIFO");
         ApplyFifo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ApplyFifoActionPerformed(evt);
             }
         });
-        MemoryManagement.add(ApplyFifo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 460, -1, -1));
+        MemoryManagement.add(ApplyFifo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 460, -1, -1));
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/memory-management.png"))); // NOI18N
         MemoryManagement.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 540));
@@ -2750,6 +2763,93 @@ private void Client(String message) {
 // TODO add your handling code here:
             
     }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void ApplyLruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApplyLruActionPerformed
+FIFO.setVisible(true);
+    FIFOScroll.setVisible(true);
+    String pagesStr = referstring.getText().trim(); // Example input from ;
+
+    int frameSize = Integer.parseInt(Framesize.getText().trim()); // Example input from ;
+    int memorySize = Integer.parseInt(Memorysize.getText().trim()); // Example input from ;
+    // Convert pagesStr to an array of integers
+    FIFO.removeAll();
+    FIFO.setLayout(null); // Set layout to null for absolute positioning
+
+    int xDataOffset = 10;
+    int yDataOffset = 10;
+
+    int[] pages = new int[pagesStr.length()];
+    for (int i = 0; i < pagesStr.length(); i++) {
+        pages[i] = Character.getNumericValue(pagesStr.charAt(i));
+    }
+    // Validate frameSize to not exceed memorySize
+    if (frameSize > memorySize) {
+        System.err.println("Error: Frame size cannot be greater than memory size.");
+        return;
+    }
+    // LinkedHashMap to hold the current pages in memory and their usage order
+    LinkedHashMap<Integer, Integer> lruMap = new LinkedHashMap<>(frameSize, 0.75f, true);
+    int pageFaults = 0;
+    int pageHits = 0;
+
+    // Process each page in the reference string
+    for (int i = 0; i < pages.length; i++) {
+        int currentPage = pages[i];
+
+        // Check if current page is already in memory
+        if (!lruMap.containsKey(currentPage)) {
+            // Page fault, because current page is not in memory
+            pageFaults++;
+
+            // If the LRU map is full, remove the least recently used page (the first entry)
+            if (lruMap.size() == frameSize) {
+                int removedPage = lruMap.entrySet().iterator().next().getKey();
+                lruMap.remove(removedPage);
+                JLabel fault = createHeaderLabel("Page " + removedPage + " removed from frame (Page Fault)");
+                fault.setBounds(xDataOffset, yDataOffset, 600, 30);
+                FIFO.add(fault);
+                yDataOffset += 40;
+            }
+
+            // Add current page to the LRU map
+            lruMap.put(currentPage, currentPage);
+            JLabel fault = createHeaderLabel("Page " + currentPage + " added to frame (Page Fault)");
+            fault.setBounds(xDataOffset, yDataOffset, 600, 30);
+            FIFO.add(fault);
+            yDataOffset += 40;
+        } else {
+            // Page hit, because current page is already in memory
+            pageHits++;
+            JLabel fault = createHeaderLabel("Page " + currentPage + " already in frame (Page Hit)");
+            fault.setBounds(xDataOffset, yDataOffset, 600, 30);
+            FIFO.add(fault);
+            yDataOffset += 40;
+        }
+        JLabel fault = createHeaderLabel("Current frames: " + lruMap.keySet());
+        fault.setBounds(xDataOffset, yDataOffset, 600, 30);
+        FIFO.add(fault);
+        yDataOffset += 40;
+    }
+
+    JLabel fault = createHeaderLabel("\nTotal Page Faults: " + pageFaults);
+    fault.setBounds(xDataOffset, yDataOffset, 600, 30);
+    FIFO.add(fault);
+    yDataOffset += 40;
+    System.out.println();
+    JLabel hit = createHeaderLabel("Total Page Hits: " + pageHits);
+    hit.setBounds(xDataOffset, yDataOffset, 600, 30);
+    FIFO.add(hit);
+    yDataOffset += 40;
+    hit = createHeaderLabel("");
+    hit.setBounds(xDataOffset, yDataOffset, 600, 30);
+    FIFO.add(hit);
+    FIFO.setPreferredSize(new Dimension(620, yDataOffset + 20));
+
+    // Repaint the destroyPanel to reflect changes
+    FIFO.revalidate();
+    FIFO.repaint();        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ApplyLruActionPerformed
 private int comparePriority(String priority1, String priority2) {
     // Assigning numerical values to priorities
     int priorityValue1 = getPriorityValue(priority1);
@@ -2809,6 +2909,7 @@ private int getPriorityValue(String priority) {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ApplyFifo;
+    private javax.swing.JButton ApplyLru;
     private javax.swing.JPanel DisplaySchedulingPanel;
     private javax.swing.JPanel FIFO;
     private javax.swing.JScrollPane FIFOScroll;
