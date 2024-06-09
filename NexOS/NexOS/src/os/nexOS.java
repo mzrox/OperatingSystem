@@ -81,16 +81,21 @@ public class nexOS extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         OtherOperationPanel = new javax.swing.JPanel();
         goBack4 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
+        Socketprog = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
         SocketPanel = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jButton7 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         clientMessage = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButton10 = new javax.swing.JButton();
         clientMessageField = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         IOmanagmentPanel = new javax.swing.JPanel();
         goBack3 = new javax.swing.JLabel();
@@ -329,64 +334,114 @@ public class nexOS extends javax.swing.JFrame {
         });
         OtherOperationPanel.add(goBack4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 220, 40));
 
-        jButton6.setText("SOCKET PROGRAMMING");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        Socketprog.setBackground(new java.awt.Color(24, 41, 42));
+        Socketprog.setFont(new java.awt.Font("SimSun", 1, 14)); // NOI18N
+        Socketprog.setForeground(new java.awt.Color(170, 171, 171));
+        Socketprog.setText("SOCKET PROGRAMMING");
+        Socketprog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                SocketprogActionPerformed(evt);
             }
         });
-        OtherOperationPanel.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, -1, -1));
+        OtherOperationPanel.add(Socketprog, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, -1, 25));
+
+        jButton11.setBackground(new java.awt.Color(24, 41, 42));
+        jButton11.setFont(new java.awt.Font("SimSun", 1, 14)); // NOI18N
+        jButton11.setForeground(new java.awt.Color(170, 171, 171));
+        jButton11.setText("SOCKET PROGRAMMING");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+        OtherOperationPanel.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 80, -1, 25));
+
+        jButton12.setBackground(new java.awt.Color(24, 41, 42));
+        jButton12.setFont(new java.awt.Font("SimSun", 1, 14)); // NOI18N
+        jButton12.setForeground(new java.awt.Color(170, 171, 171));
+        jButton12.setText("SOCKET PROGRAMMING");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
+        OtherOperationPanel.add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, -1, 25));
 
         SocketPanel.setBackground(new java.awt.Color(22, 41, 42));
         SocketPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel3.setBackground(new java.awt.Color(22, 41, 30));
+        jPanel3.setBackground(new java.awt.Color(18, 72, 64));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jButton7.setBackground(new java.awt.Color(24, 41, 42));
+        jButton7.setFont(new java.awt.Font("SimSun", 1, 14)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(170, 171, 171));
         jButton7.setText("Start");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        jPanel3.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 120, -1));
 
+        jButton9.setBackground(new java.awt.Color(24, 41, 42));
+        jButton9.setFont(new java.awt.Font("SimSun", 1, 14)); // NOI18N
+        jButton9.setForeground(new java.awt.Color(170, 171, 171));
         jButton9.setText("Stop");
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton9ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, -1, -1));
+        jPanel3.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 110, -1));
 
         clientMessage.setFont(new java.awt.Font("SimSun", 0, 18)); // NOI18N
         clientMessage.setForeground(new java.awt.Color(170, 171, 171));
-        jPanel3.add(clientMessage, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 370, 140));
+        clientMessage.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        jPanel3.add(clientMessage, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 370, 190));
 
         jLabel16.setFont(new java.awt.Font("SimSun", 1, 18)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(170, 171, 171));
         jLabel16.setText("Clients Message:");
-        jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
+        jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("SimSun", 1, 36)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(170, 171, 171));
+        jLabel7.setText("Server");
+        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 130, 30));
 
         SocketPanel.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, 410, 360));
 
-        jPanel2.setBackground(new java.awt.Color(22, 41, 30));
+        jPanel2.setBackground(new java.awt.Color(18, 72, 64));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jButton10.setBackground(new java.awt.Color(24, 41, 42));
+        jButton10.setFont(new java.awt.Font("SimSun", 1, 14)); // NOI18N
+        jButton10.setForeground(new java.awt.Color(170, 171, 171));
         jButton10.setText("Send");
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton10ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, -1, -1));
-        jPanel2.add(clientMessageField, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 260, -1));
+        jPanel2.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 230, 100, 30));
+        jPanel2.add(clientMessageField, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 310, 110));
+
+        jLabel17.setFont(new java.awt.Font("SimSun", 1, 18)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(170, 171, 171));
+        jLabel17.setText("Message:");
+        jPanel2.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 100, 30));
+
+        jLabel19.setFont(new java.awt.Font("SimSun", 1, 36)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(170, 171, 171));
+        jLabel19.setText("Client");
+        jPanel2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 120, 30));
 
         SocketPanel.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 410, 360));
 
         OtherOperationPanel.add(SocketPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 890, 370));
 
-        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/IO-MANAGEMENT.png"))); // NOI18N
+        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/OTHER-OPERATION.png"))); // NOI18N
         OtherOperationPanel.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 540));
 
         getContentPane().add(OtherOperationPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 540));
@@ -2678,10 +2733,10 @@ MemoryManagement.setVisible(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void SocketprogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SocketprogActionPerformed
         SocketPanel.setVisible(true);
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_SocketprogActionPerformed
 private Thread serverThread;
 private volatile boolean running;
 
@@ -2898,6 +2953,14 @@ private void Client(String message) {
     FIFO.repaint();
     }//GEN-LAST:event_ApplyLruActionPerformed
 
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton12ActionPerformed
+
 private JLabel createHeaderLabel1(String text) {
     JLabel label = new JLabel(text);
     label.setFont(new java.awt.Font("SimSun", 1, 14));
@@ -2980,6 +3043,7 @@ private int getPriorityValue(String priority) {
     private javax.swing.JPanel ProcessPanel;
     private javax.swing.JPanel SchedulingPanel;
     private javax.swing.JPanel SocketPanel;
+    private javax.swing.JButton Socketprog;
     private javax.swing.JButton blockButton;
     private javax.swing.JButton changePriorityButton;
     private javax.swing.JTextField changePriorityPId;
@@ -3008,11 +3072,12 @@ private int getPriorityValue(String priority) {
     private javax.swing.JPanel ioOut;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
@@ -3024,13 +3089,16 @@ private int getPriorityValue(String priority) {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
