@@ -14,6 +14,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Queue;
 import javax.swing.JButton;
@@ -2765,12 +2768,13 @@ private void Client(String message) {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void ApplyLruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApplyLruActionPerformed
-FIFO.setVisible(true);
+   FIFO.setVisible(true);
     FIFOScroll.setVisible(true);
-    String pagesStr = referstring.getText().trim(); // Example input from ;
+    String pagesStr = referstring.getText().trim(); // Example input from referstring JTextField
 
-    int frameSize = Integer.parseInt(Framesize.getText().trim()); // Example input from ;
-    int memorySize = Integer.parseInt(Memorysize.getText().trim()); // Example input from ;
+    int frameSize = Integer.parseInt(Framesize.getText().trim()); // Example input from Framesize JTextField
+    int memorySize = Integer.parseInt(Memorysize.getText().trim()); // Example input from Memorysize JTextField
+
     // Convert pagesStr to an array of integers
     FIFO.removeAll();
     FIFO.setLayout(null); // Set layout to null for absolute positioning
@@ -2778,87 +2782,136 @@ FIFO.setVisible(true);
     int xDataOffset = 10;
     int yDataOffset = 10;
 
+    // Split pagesStr into individual digits
     int[] pages = new int[pagesStr.length()];
     for (int i = 0; i < pagesStr.length(); i++) {
         pages[i] = Character.getNumericValue(pagesStr.charAt(i));
     }
+
     // Validate frameSize to not exceed memorySize
     if (frameSize > memorySize) {
         System.err.println("Error: Frame size cannot be greater than memory size.");
         return;
     }
-    // LinkedHashMap to hold the current pages in memory and their usage order
-    LinkedHashMap<Integer, Integer> lruMap = new LinkedHashMap<>(frameSize, 0.75f, true);
-    int pageFaults = 0;
-    int pageHits = 0;
 
-    // Process each page in the reference string
+    // To represent set of current pages
+    HashSet<Integer> s = new HashSet<>(frameSize);
+
+    // To store least recently used indexes of pages
+    HashMap<Integer, Integer> indexes = new HashMap<>();
+
+    int page_faults = 0;
+    int page_hits = 0;
     for (int i = 0; i < pages.length; i++) {
-        int currentPage = pages[i];
+        // Check if the set can hold more pages
+        if (s.size() < frameSize) {
+            // Insert it into set if not present already which represents page fault
+            if (!s.contains(pages[i])) {
+                s.add(pages[i]);
 
-        // Check if current page is already in memory
-        if (!lruMap.containsKey(currentPage)) {
-            // Page fault, because current page is not in memory
-            pageFaults++;
-
-            // If the LRU map is full, remove the least recently used page (the first entry)
-            if (lruMap.size() == frameSize) {
-                int removedPage = lruMap.entrySet().iterator().next().getKey();
-                lruMap.remove(removedPage);
-                JLabel fault = createHeaderLabel("Page " + removedPage + " removed from frame (Page Fault)");
+                // Increment page fault
+                page_faults++;
+                JLabel fault = createHeaderLabel1("Page " + pages[i] + " added to frame (Page Fault)");
                 fault.setBounds(xDataOffset, yDataOffset, 600, 30);
+                fault.setForeground(new Color(170, 171, 171)); // Set custom RGB color
                 FIFO.add(fault);
+                yDataOffset += 40;
+            } else {
+                // Page hit
+                page_hits++;
+                JLabel hit = createHeaderLabel1("Page " + pages[i] + " already in frame (Page Hit)");
+                hit.setBounds(xDataOffset, yDataOffset, 600, 30);
+                hit.setForeground(new Color(170, 171, 171)); // Set custom RGB color
+                FIFO.add(hit);
                 yDataOffset += 40;
             }
 
-            // Add current page to the LRU map
-            lruMap.put(currentPage, currentPage);
-            JLabel fault = createHeaderLabel("Page " + currentPage + " added to frame (Page Fault)");
-            fault.setBounds(xDataOffset, yDataOffset, 600, 30);
-            FIFO.add(fault);
-            yDataOffset += 40;
+            // Store the recently used index of each page
+            indexes.put(pages[i], i);
         } else {
-            // Page hit, because current page is already in memory
-            pageHits++;
-            JLabel fault = createHeaderLabel("Page " + currentPage + " already in frame (Page Hit)");
-            fault.setBounds(xDataOffset, yDataOffset, 600, 30);
-            FIFO.add(fault);
-            yDataOffset += 40;
+            // If the set is full then need to perform LRU
+            if (!s.contains(pages[i])) {
+                // Find the least recently used page in the set
+                int lru = Integer.MAX_VALUE, val = Integer.MIN_VALUE;
+
+                Iterator<Integer> itr = s.iterator();
+
+                while (itr.hasNext()) {
+                    int temp = itr.next();
+                    if (indexes.get(temp) < lru) {
+                        lru = indexes.get(temp);
+                        val = temp;
+                    }
+                }
+
+                // Remove the least recently used page
+                s.remove(val);
+                indexes.remove(val);
+
+                // Add the current page to the set
+                s.add(pages[i]);
+
+                // Increment page faults
+                page_faults++;
+                JLabel fault = createHeaderLabel1("Page " + val + " removed from frame, Page " + pages[i] + " added to frame (Page Fault)");
+                fault.setBounds(xDataOffset, yDataOffset, 600, 30);
+                fault.setForeground(new Color(170, 171, 171)); // Set custom RGB color
+                FIFO.add(fault);
+                yDataOffset += 40;
+            } else {
+                // Page hit
+                page_hits++;
+                JLabel hit = createHeaderLabel1("Page " + pages[i] + " already in frame (Page Hit)");
+                hit.setBounds(xDataOffset, yDataOffset, 600, 30);
+                hit.setForeground(new Color(170, 171, 171)); // Set custom RGB color
+                FIFO.add(hit);
+                yDataOffset += 40;
+            }
+
+            // Update the current page index
+            indexes.put(pages[i], i);
         }
-        JLabel fault = createHeaderLabel("Current frames: " + lruMap.keySet());
-        fault.setBounds(xDataOffset, yDataOffset, 600, 30);
-        FIFO.add(fault);
+
+        JLabel currentFramesLabel = createHeaderLabel1("Current frames: " + s);
+        currentFramesLabel.setBounds(xDataOffset, yDataOffset, 600, 30);
+        currentFramesLabel.setForeground(new Color(170, 171, 171)); // Set custom RGB color
+        FIFO.add(currentFramesLabel);
         yDataOffset += 40;
     }
 
-    JLabel fault = createHeaderLabel("\nTotal Page Faults: " + pageFaults);
-    fault.setBounds(xDataOffset, yDataOffset, 600, 30);
-    FIFO.add(fault);
+    JLabel totalFaultsLabel = createHeaderLabel1("\nTotal Page Faults: " + page_faults);
+    totalFaultsLabel.setBounds(xDataOffset, yDataOffset, 600, 30);
+    totalFaultsLabel.setForeground(new Color(170, 171, 171)); // Set custom RGB color
+    FIFO.add(totalFaultsLabel);
     yDataOffset += 40;
-    System.out.println();
-    JLabel hit = createHeaderLabel("Total Page Hits: " + pageHits);
-    hit.setBounds(xDataOffset, yDataOffset, 600, 30);
-    FIFO.add(hit);
-    yDataOffset += 40;
-    hit = createHeaderLabel("");
-    hit.setBounds(xDataOffset, yDataOffset, 600, 30);
-    FIFO.add(hit);
-    FIFO.setPreferredSize(new Dimension(620, yDataOffset + 20));
 
-    // Repaint the destroyPanel to reflect changes
+    JLabel totalHitsLabel = createHeaderLabel1("Total Page Hits: " + page_hits);
+    totalHitsLabel.setBounds(xDataOffset, yDataOffset, 600, 30);
+    totalHitsLabel.setForeground(new Color(170, 171, 171)); // Set custom RGB color
+    FIFO.add(totalHitsLabel);
+    yDataOffset += 40;
+
+    FIFO.setPreferredSize(new java.awt.Dimension(620, yDataOffset + 20));
+
+    // Repaint the FIFO panel to reflect changes
     FIFO.revalidate();
-    FIFO.repaint();        
-        // TODO add your handling code here:
+    FIFO.repaint();
     }//GEN-LAST:event_ApplyLruActionPerformed
-private int comparePriority(String priority1, String priority2) {
+
+private JLabel createHeaderLabel1(String text) {
+    JLabel label = new JLabel(text);
+    label.setFont(new java.awt.Font("SimSun", 1, 14));
+    label.setForeground(new Color(170,171,171));
+    return label;
+}
+    private int comparePriority(String priority1, String priority2) {
     // Assigning numerical values to priorities
     int priorityValue1 = getPriorityValue(priority1);
     int priorityValue2 = getPriorityValue(priority2);
 
     // Compare priorities
     return Integer.compare(priorityValue1, priorityValue2);
-}
-
+    }
 private int getPriorityValue(String priority) {
     switch (priority.toLowerCase()) {
         case "high":
@@ -2871,6 +2924,7 @@ private int getPriorityValue(String priority) {
             return 0;
     }
 }
+
     /**
      * @param args the command line arguments
      */
