@@ -2756,6 +2756,16 @@ private void startServer(Boolean var) {
         }
     }
 }
+private void stopServer(Boolean var) {
+    running = false;
+    if (serverThread != null) {
+        try {
+            serverThread.join();
+        } catch (InterruptedException e) {
+            JOptionPane.showMessageDialog(null, "Error stopping server thread. " + e);
+        }
+    }
+}
 
 private void Server() {
     ServerSocket serverSocket = null;
@@ -2795,6 +2805,7 @@ private void Server() {
 }
 
 
+
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         startServer(true);
         // TODO add your handling code here:
@@ -2802,6 +2813,9 @@ private void Server() {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         startServer(false);
+   
+          JOptionPane.showMessageDialog(null, "Server has been stopped successfully.");
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton9ActionPerformed
 private void Client(String message) {
