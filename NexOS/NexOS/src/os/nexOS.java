@@ -140,6 +140,7 @@ public class nexOS extends javax.swing.JFrame {
         pagesize = new javax.swing.JTextField();
         physicaladdress = new javax.swing.JTextField();
         Paging = new javax.swing.JButton();
+        Paging1 = new javax.swing.JButton();
         FIFOScroll = new javax.swing.JScrollPane();
         FIFO = new javax.swing.JPanel();
         goBack1 = new javax.swing.JLabel();
@@ -709,6 +710,17 @@ public class nexOS extends javax.swing.JFrame {
             }
         });
         PaggingPanel.add(Paging, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 80, -1));
+
+        Paging1.setBackground(new java.awt.Color(22, 42, 41));
+        Paging1.setFont(new java.awt.Font("SimSun", 1, 14)); // NOI18N
+        Paging1.setForeground(new java.awt.Color(170, 171, 171));
+        Paging1.setText("Apply");
+        Paging1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Paging1ActionPerformed(evt);
+            }
+        });
+        PaggingPanel.add(Paging1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 80, -1));
 
         MemoryManagement.add(PaggingPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 440, 310));
 
@@ -3066,10 +3078,9 @@ private void Client(String message) {
     }//GEN-LAST:event_physicaladdressActionPerformed
 
     private void PagingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PagingActionPerformed
-   // Get user inputs from the text fields
-    String physicalAddressInput = "64 MB"; // Sample input
-    String logicalAddressInput = "4 GB"; // Sample input
-    String pageSizeInput = "4 KB"; // Sample input
+     String physicalAddressInput = physicaladdress.getText().trim();
+    String logicalAddressInput = logicaladdress.getText().trim();
+    String pageSizeInput = pagesize.getText().trim();
     
     // Convert inputs to powers of 2 (bits)
     long physicalAddressBits = convertToBits(physicalAddressInput);
@@ -3095,19 +3106,19 @@ private void Client(String message) {
     long sizeOfPageTable = entries;
 
     // Print results to the panel
-    JLabel nop = createHeaderLabel("NO OF PAGES ARE: " + noOfPages + "Bits");
+    JLabel nop = createHeaderLabel("NO OF PAGES ARE: " + noOfPages);
     nop.setBounds(7, 5, 600, 30);
     FIFO.add(nop);
 
-    JLabel nof = createHeaderLabel("NO OF FRAMES ARE: " + noOfFrames+ "Bits");
+    JLabel nof = createHeaderLabel("NO OF FRAMES ARE: " + noOfFrames);
     nof.setBounds(7, 30, 600, 30);
     FIFO.add(nof);
 
-    JLabel e = createHeaderLabel("NO OF ENTRIES ARE: " + entries+ "Bits");
+    JLabel e = createHeaderLabel("NO OF ENTRIES ARE: " + entries);
     e.setBounds(7, 55, 600, 30);
     FIFO.add(e);
 
-    JLabel sop = createHeaderLabel("SIZE OF PAGE TABLE IS: " + sizeOfPageTable+ "Bits");
+    JLabel sop = createHeaderLabel("SIZE OF PAGE TABLE IS: " + sizeOfPageTable);
     sop.setBounds(7, 80, 600, 30);
     FIFO.add(sop);
 
@@ -3131,6 +3142,10 @@ private long convertToBits(String input) {
         return Long.parseLong(input.trim()) * 8; // Assume input is already in bits if no unit is specified
     }
     }//GEN-LAST:event_PagingActionPerformed
+
+    private void Paging1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Paging1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Paging1ActionPerformed
 private JLabel createHeaderLabel3(String text) {
     JLabel label = new JLabel(text);
     label.setFont(new Font("Arial", Font.BOLD, 14));
@@ -3219,6 +3234,7 @@ private int getPriorityValue(String priority) {
     private javax.swing.JPanel PageSchedulingPanel;
     private javax.swing.JPanel PaggingPanel;
     private javax.swing.JButton Paging;
+    private javax.swing.JButton Paging1;
     private javax.swing.JButton ProcessManagementButton;
     private javax.swing.JPanel ProcessPanel;
     private javax.swing.JPanel SchedulingPanel;
