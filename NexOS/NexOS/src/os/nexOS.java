@@ -56,6 +56,7 @@ public class nexOS extends javax.swing.JFrame {
     private void initComponents() {
 
         io = new javax.swing.ButtonGroup();
+        jLabel21 = new javax.swing.JLabel();
         ProcessPanel = new javax.swing.JPanel();
         goBack = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
@@ -120,6 +121,7 @@ public class nexOS extends javax.swing.JFrame {
         MemoryManagement = new javax.swing.JPanel();
         ApplyLru2 = new javax.swing.JButton();
         ApplyLru1 = new javax.swing.JButton();
+        jLabel25 = new javax.swing.JLabel();
         PageSchedulingPanel = new javax.swing.JPanel();
         ApplyLru = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
@@ -131,6 +133,13 @@ public class nexOS extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         PaggingPanel = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        logicaladdress = new javax.swing.JTextField();
+        pagesize = new javax.swing.JTextField();
+        physicaladdress = new javax.swing.JTextField();
+        Paging = new javax.swing.JButton();
         FIFOScroll = new javax.swing.JScrollPane();
         FIFO = new javax.swing.JPanel();
         goBack1 = new javax.swing.JLabel();
@@ -156,6 +165,8 @@ public class nexOS extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         maxProcessField = new javax.swing.JTextField();
         maxProcessButton = new javax.swing.JButton();
+
+        jLabel21.setText("jLabel21");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -573,7 +584,7 @@ public class nexOS extends javax.swing.JFrame {
         ApplyLru2.setBackground(new java.awt.Color(22, 41, 42));
         ApplyLru2.setFont(new java.awt.Font("SimSun", 1, 18)); // NOI18N
         ApplyLru2.setForeground(new java.awt.Color(170, 171, 171));
-        ApplyLru2.setText("PAGGING");
+        ApplyLru2.setText("PAGING");
         ApplyLru2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ApplyLru2ActionPerformed(evt);
@@ -591,6 +602,11 @@ public class nexOS extends javax.swing.JFrame {
             }
         });
         MemoryManagement.add(ApplyLru1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 152, 200, 30));
+
+        jLabel25.setFont(new java.awt.Font("SimSun", 1, 24)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(170, 171, 171));
+        jLabel25.setText("OUTPUT");
+        MemoryManagement.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 150, 80, 40));
 
         PageSchedulingPanel.setBackground(new java.awt.Color(22, 42, 41));
         PageSchedulingPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -658,6 +674,42 @@ public class nexOS extends javax.swing.JFrame {
 
         PaggingPanel.setBackground(new java.awt.Color(22, 42, 41));
         PaggingPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel22.setFont(new java.awt.Font("SimSun", 1, 18)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(170, 171, 171));
+        jLabel22.setText("Physical address:");
+        PaggingPanel.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
+
+        jLabel23.setFont(new java.awt.Font("SimSun", 1, 18)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(170, 171, 171));
+        jLabel23.setText("Logical address:");
+        PaggingPanel.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
+
+        jLabel24.setFont(new java.awt.Font("SimSun", 1, 18)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(170, 171, 171));
+        jLabel24.setText("PageSize:");
+        PaggingPanel.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
+        PaggingPanel.add(logicaladdress, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 150, 120, -1));
+        PaggingPanel.add(pagesize, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, 120, -1));
+
+        physicaladdress.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                physicaladdressActionPerformed(evt);
+            }
+        });
+        PaggingPanel.add(physicaladdress, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 120, -1));
+
+        Paging.setBackground(new java.awt.Color(22, 42, 41));
+        Paging.setFont(new java.awt.Font("SimSun", 1, 14)); // NOI18N
+        Paging.setForeground(new java.awt.Color(170, 171, 171));
+        Paging.setText("Apply");
+        Paging.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PagingActionPerformed(evt);
+            }
+        });
+        PaggingPanel.add(Paging, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 80, -1));
+
         MemoryManagement.add(PaggingPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 440, 310));
 
         FIFOScroll.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -667,7 +719,7 @@ public class nexOS extends javax.swing.JFrame {
         FIFO.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         FIFOScroll.setViewportView(FIFO);
 
-        MemoryManagement.add(FIFOScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 150, 420, 350));
+        MemoryManagement.add(FIFOScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 200, 420, 300));
 
         goBack1.setText("                                                            ");
         goBack1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2994,7 +3046,7 @@ private void Client(String message) {
         // Repaint the destroyPanel to reflect changes
         FIFO.revalidate();
         FIFO.repaint();
-        //hello friends
+        
     }//GEN-LAST:event_ApplyFifoActionPerformed
 
     private void ApplyLru1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApplyLru1ActionPerformed
@@ -3008,6 +3060,82 @@ private void Client(String message) {
         PageSchedulingPanel.setVisible(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_ApplyLru2ActionPerformed
+
+    private void physicaladdressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_physicaladdressActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_physicaladdressActionPerformed
+
+    private void PagingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PagingActionPerformed
+   // Get user inputs from the text fields
+    String physicalAddressInput = "64 MB"; // Sample input
+    String logicalAddressInput = "4 GB"; // Sample input
+    String pageSizeInput = "4 KB"; // Sample input
+    
+    // Convert inputs to powers of 2 (bits)
+    long physicalAddressBits = convertToBits(physicalAddressInput);
+    long logicalAddressBits = convertToBits(logicalAddressInput);
+    long pageSizeBits = convertToBits(pageSizeInput);
+    
+    // Make the FIFO panel and its scroll pane visible
+    FIFO.setVisible(true);
+    FIFOScroll.setVisible(true);
+    
+    // Clear previous components and set layout
+    FIFO.removeAll();
+    FIFO.setLayout(null);
+
+    // Calculate the number of pages and frames
+    long noOfPages = logicalAddressBits / pageSizeBits;
+    long noOfFrames = physicalAddressBits / pageSizeBits;
+
+    // The number of entries is equal to the number of pages
+    long entries = noOfPages;
+
+    // Typically, the size of the page table is the number of entries
+    long sizeOfPageTable = entries;
+
+    // Print results to the panel
+    JLabel nop = createHeaderLabel("NO OF PAGES ARE: " + noOfPages + "Bits");
+    nop.setBounds(7, 5, 600, 30);
+    FIFO.add(nop);
+
+    JLabel nof = createHeaderLabel("NO OF FRAMES ARE: " + noOfFrames+ "Bits");
+    nof.setBounds(7, 30, 600, 30);
+    FIFO.add(nof);
+
+    JLabel e = createHeaderLabel("NO OF ENTRIES ARE: " + entries+ "Bits");
+    e.setBounds(7, 55, 600, 30);
+    FIFO.add(e);
+
+    JLabel sop = createHeaderLabel("SIZE OF PAGE TABLE IS: " + sizeOfPageTable+ "Bits");
+    sop.setBounds(7, 80, 600, 30);
+    FIFO.add(sop);
+
+    // Set the preferred size of the FIFO panel
+    FIFO.setPreferredSize(new Dimension(620, 120));
+
+    // Repaint the panel to reflect changes
+    FIFO.revalidate();
+    FIFO.repaint();
+}
+
+private long convertToBits(String input) {
+    input = input.toUpperCase();
+    if (input.endsWith("GB")) {
+        return Long.parseLong(input.replace("GB", "").trim()) * 1024 * 1024 * 1024 * 8; // Convert GB to bits
+    } else if (input.endsWith("MB")) {
+        return Long.parseLong(input.replace("MB", "").trim()) * 1024 * 1024 * 8; // Convert MB to bits
+    } else if (input.endsWith("KB")) {
+        return Long.parseLong(input.replace("KB", "").trim()) * 1024 * 8; // Convert KB to bits
+    } else {
+        return Long.parseLong(input.trim()) * 8; // Assume input is already in bits if no unit is specified
+    }
+    }//GEN-LAST:event_PagingActionPerformed
+private JLabel createHeaderLabel3(String text) {
+    JLabel label = new JLabel(text);
+    label.setFont(new Font("Arial", Font.BOLD, 14));
+    return label;
+}
 
 private JLabel createHeaderLabel1(String text) {
     JLabel label = new JLabel(text);
@@ -3090,6 +3218,7 @@ private int getPriorityValue(String priority) {
     private javax.swing.JPanel OtherOperationPanel;
     private javax.swing.JPanel PageSchedulingPanel;
     private javax.swing.JPanel PaggingPanel;
+    private javax.swing.JButton Paging;
     private javax.swing.JButton ProcessManagementButton;
     private javax.swing.JPanel ProcessPanel;
     private javax.swing.JPanel SchedulingPanel;
@@ -3145,6 +3274,11 @@ private int getPriorityValue(String priority) {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -3157,10 +3291,13 @@ private int getPriorityValue(String priority) {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel keyboard;
     private javax.swing.JRadioButton keyboardR;
+    private javax.swing.JTextField logicaladdress;
     private javax.swing.JButton maxProcessButton;
     private javax.swing.JTextField maxProcessField;
     private javax.swing.JLabel mouse;
     private javax.swing.JRadioButton mouseR;
+    private javax.swing.JTextField pagesize;
+    private javax.swing.JTextField physicaladdress;
     private javax.swing.JLabel printer;
     private javax.swing.JRadioButton printerR;
     private javax.swing.JButton processButton;
