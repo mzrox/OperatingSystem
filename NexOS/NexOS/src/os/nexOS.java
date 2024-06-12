@@ -133,6 +133,7 @@ public class nexOS extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         PaggingPanel = new javax.swing.JPanel();
+        jLabel26 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
@@ -140,7 +141,6 @@ public class nexOS extends javax.swing.JFrame {
         pagesize = new javax.swing.JTextField();
         physicaladdress = new javax.swing.JTextField();
         Paging = new javax.swing.JButton();
-        Paging1 = new javax.swing.JButton();
         FIFOScroll = new javax.swing.JScrollPane();
         FIFO = new javax.swing.JPanel();
         goBack1 = new javax.swing.JLabel();
@@ -676,6 +676,11 @@ public class nexOS extends javax.swing.JFrame {
         PaggingPanel.setBackground(new java.awt.Color(22, 42, 41));
         PaggingPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel26.setFont(new java.awt.Font("SimSun", 1, 24)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(170, 171, 171));
+        jLabel26.setText("INPUT");
+        PaggingPanel.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 70, 40));
+
         jLabel22.setFont(new java.awt.Font("SimSun", 1, 18)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(170, 171, 171));
         jLabel22.setText("Physical address:");
@@ -710,17 +715,6 @@ public class nexOS extends javax.swing.JFrame {
             }
         });
         PaggingPanel.add(Paging, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 80, -1));
-
-        Paging1.setBackground(new java.awt.Color(22, 42, 41));
-        Paging1.setFont(new java.awt.Font("SimSun", 1, 14)); // NOI18N
-        Paging1.setForeground(new java.awt.Color(170, 171, 171));
-        Paging1.setText("Apply");
-        Paging1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Paging1ActionPerformed(evt);
-            }
-        });
-        PaggingPanel.add(Paging1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 80, -1));
 
         MemoryManagement.add(PaggingPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 440, 310));
 
@@ -3142,10 +3136,6 @@ private long convertToBits(String input) {
         return Long.parseLong(input.trim()) * 8; // Assume input is already in bits if no unit is specified
     }
     }//GEN-LAST:event_PagingActionPerformed
-
-    private void Paging1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Paging1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Paging1ActionPerformed
 private JLabel createHeaderLabel3(String text) {
     JLabel label = new JLabel(text);
     label.setFont(new Font("Arial", Font.BOLD, 14));
@@ -3234,7 +3224,6 @@ private int getPriorityValue(String priority) {
     private javax.swing.JPanel PageSchedulingPanel;
     private javax.swing.JPanel PaggingPanel;
     private javax.swing.JButton Paging;
-    private javax.swing.JButton Paging1;
     private javax.swing.JButton ProcessManagementButton;
     private javax.swing.JPanel ProcessPanel;
     private javax.swing.JPanel SchedulingPanel;
@@ -3295,6 +3284,7 @@ private int getPriorityValue(String priority) {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
