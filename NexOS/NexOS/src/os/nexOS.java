@@ -133,6 +133,7 @@ public class nexOS extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         PaggingPanel = new javax.swing.JPanel();
+        jLabel26 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
@@ -674,6 +675,11 @@ public class nexOS extends javax.swing.JFrame {
 
         PaggingPanel.setBackground(new java.awt.Color(22, 42, 41));
         PaggingPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel26.setFont(new java.awt.Font("SimSun", 1, 24)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(170, 171, 171));
+        jLabel26.setText("INPUT");
+        PaggingPanel.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 70, 40));
 
         jLabel22.setFont(new java.awt.Font("SimSun", 1, 18)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(170, 171, 171));
@@ -3293,6 +3299,7 @@ private int getPriorityValue(String priority) {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
