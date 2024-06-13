@@ -2001,7 +2001,9 @@ MemoryManagement.setVisible(false);
         // Repaint the destroyPanel to reflect changes
         DisplaySchedulingPanel.revalidate();
         DisplaySchedulingPanel.repaint();
-        
+        for(int i =0; i<n; i++){
+            process[i].setStatus("Running");
+        }
 //        System.out.println("Average Waiting Time: " + avgWaitingTime);
 //        System.out.println("Average Turnaround Time: " + avgTurnaroundTime);
     }//GEN-LAST:event_fcfsButtonActionPerformed
@@ -2140,6 +2142,9 @@ MemoryManagement.setVisible(false);
         // Repaint the destroyPanel to reflect changes
         DisplaySchedulingPanel.revalidate();
         DisplaySchedulingPanel.repaint();
+        for(int i =0; i<n; i++){
+            process[i].setStatus("Running");
+        }
     }//GEN-LAST:event_sjfButtonActionPerformed
 
     private void rrButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rrButtonActionPerformed
@@ -2301,6 +2306,9 @@ MemoryManagement.setVisible(false);
         // Repaint the destroyPanel to reflect changes
         DisplaySchedulingPanel.revalidate();
         DisplaySchedulingPanel.repaint();
+        for(int i =0; i<n; i++){
+            process[i].setStatus("Running");
+        }
     }//GEN-LAST:event_rrButtonActionPerformed
 
     private void sjfNonPremButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sjfNonPremButtonActionPerformed
@@ -2434,6 +2442,9 @@ MemoryManagement.setVisible(false);
         // Repaint the destroyPanel to reflect changes
         DisplaySchedulingPanel.revalidate();
         DisplaySchedulingPanel.repaint();
+        for(int i =0; i<n; i++){
+            process[i].setStatus("Running");
+        }
     }//GEN-LAST:event_sjfNonPremButtonActionPerformed
 
     private void fcfsPremButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fcfsPremButtonActionPerformed
@@ -2581,6 +2592,9 @@ MemoryManagement.setVisible(false);
         // Repaint the destroyPanel to reflect changes
         DisplaySchedulingPanel.revalidate();
         DisplaySchedulingPanel.repaint();
+        for(int i =0; i<n; i++){
+            process[i].setStatus("Running");
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_fcfsPremButtonActionPerformed
 
