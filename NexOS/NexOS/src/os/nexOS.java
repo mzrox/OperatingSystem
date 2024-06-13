@@ -790,7 +790,7 @@ public class nexOS extends javax.swing.JFrame {
         jButton3.setBackground(new java.awt.Color(22, 41, 42));
         jButton3.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
         jButton3.setForeground(new java.awt.Color(170, 171, 171));
-        jButton3.setText("Other operations");
+        jButton3.setText("Socket Programming");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
