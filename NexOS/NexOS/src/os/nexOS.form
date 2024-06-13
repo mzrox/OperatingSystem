@@ -1621,7 +1621,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ab" green="ab" red="aa" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Other operations"/>
+            <Property name="text" type="java.lang.String" value="Socket Programming"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
