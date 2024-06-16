@@ -36,9 +36,8 @@ public class nexOS extends javax.swing.JFrame {
         
         initComponents();
         // Set initial visibility
-        MainPanel.setVisible(false);
-        createPanel.setVisible(true);
-        createPanel2.setVisible(false);
+        MainPanel.setVisible(true);
+        createPanel.setVisible(false);
         ProcessPanel.setVisible(false);
         destroyScroll.setVisible(false);
         suspendScroll.setVisible(false);
@@ -153,13 +152,13 @@ public class nexOS extends javax.swing.JFrame {
         goBack2 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         MainPanel = new javax.swing.JPanel();
+        jLabel28 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         MemoryManag = new javax.swing.JButton();
         ProcessManagementButton = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         createPanel = new javax.swing.JPanel();
-        createPanel2 = new javax.swing.JPanel();
         createPanel3 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         maxProcessField = new javax.swing.JTextField();
@@ -787,6 +786,13 @@ public class nexOS extends javax.swing.JFrame {
 
         MainPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel28.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel28MouseClicked(evt);
+            }
+        });
+        MainPanel.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 210, 440, 120));
+
         jButton3.setBackground(new java.awt.Color(22, 41, 42));
         jButton3.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
         jButton3.setForeground(new java.awt.Color(170, 171, 171));
@@ -843,10 +849,6 @@ public class nexOS extends javax.swing.JFrame {
 
         createPanel.setBackground(new java.awt.Color(22, 41, 42));
         createPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        createPanel2.setBackground(new java.awt.Color(22, 41, 42));
-        createPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        createPanel.add(createPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 440, 260));
 
         createPanel3.setBackground(new java.awt.Color(22, 41, 42));
         createPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1815,7 +1817,6 @@ public class CustomProcessInputDialog extends JDialog implements ActionListener 
     // After all processes are created
     JOptionPane.showMessageDialog(createPanel, "All Processes Created Successfully");
     createPanel.setVisible(false);
-    createPanel2.setVisible(false);
     MainPanel.setVisible(true);
          
     }//GEN-LAST:event_maxProcessButtonActionPerformed
@@ -3109,6 +3110,12 @@ private long convertToBits(String input) {
         return Long.parseLong(input.trim()) * 8; // Assume input is already in bits if no unit is specified
     }
     }//GEN-LAST:event_PagingActionPerformed
+
+    private void jLabel28MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel28MouseClicked
+        MainPanel.setVisible(false);
+        createPanel.setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel28MouseClicked
 private JLabel createHeaderLabel3(String text) {
     JLabel label = new JLabel(text);
     label.setFont(new Font("Arial", Font.BOLD, 14));
@@ -3209,7 +3216,6 @@ private int getPriorityValue(String priority) {
     private javax.swing.JLabel clientMessage;
     private javax.swing.JTextField clientMessageField;
     private javax.swing.JPanel createPanel;
-    private javax.swing.JPanel createPanel2;
     private javax.swing.JPanel createPanel3;
     private javax.swing.JButton destroyButton;
     private javax.swing.JPanel destroyPanel;
@@ -3256,6 +3262,7 @@ private int getPriorityValue(String priority) {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
