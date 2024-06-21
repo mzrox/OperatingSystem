@@ -5,6 +5,7 @@ import java.io.*;
 import java.net.*;
  
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
@@ -21,6 +22,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Queue;
+import java.util.concurrent.Semaphore;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -32,13 +34,13 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import os.Process;
-
+import javax.swing.SwingWorker;
+import javax.swing.Timer;
 public class nexOS extends javax.swing.JFrame {
     private Process[] process = new Process[100];
     public int n=0;
-
     public nexOS() {
-        
+         
         initComponents();
         // Set initial visibility
         MainPanel.setVisible(true);
@@ -51,6 +53,7 @@ public class nexOS extends javax.swing.JFrame {
         SchedulingPanel.setVisible(false);
         IOmanagmentPanel.setVisible(false);
         OtherOperationPanel.setVisible(false);
+        sync.setVisible(false);
         PageSchedulingPanel.setVisible(false);
         PaggingPanel.setVisible(false);
     }
@@ -63,7 +66,7 @@ public class nexOS extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         ProcessPanel = new javax.swing.JPanel();
         goBack = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        scheduling = new javax.swing.JButton();
         destroyButton = new javax.swing.JButton();
         processButton = new javax.swing.JButton();
         suspendButton = new javax.swing.JButton();
@@ -154,18 +157,22 @@ public class nexOS extends javax.swing.JFrame {
         DisplaySchedulingPanel = new javax.swing.JPanel();
         goBack2 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        MainPanel = new javax.swing.JPanel();
-        jLabel28 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        MemoryManag = new javax.swing.JButton();
-        ProcessManagementButton = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        sync = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
         createPanel = new javax.swing.JPanel();
         createPanel3 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         maxProcessField = new javax.swing.JTextField();
         maxProcessButton = new javax.swing.JButton();
+        MainPanel = new javax.swing.JPanel();
+        jButton3 = new javax.swing.JButton();
+        MemoryManag = new javax.swing.JButton();
+        ProcessManagementButton = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
+        ProcessManagementButton1 = new javax.swing.JButton();
+        Synchronization = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         jLabel21.setText("jLabel21");
 
@@ -182,16 +189,16 @@ public class nexOS extends javax.swing.JFrame {
         });
         ProcessPanel.add(goBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 220, 40));
 
-        jButton4.setBackground(new java.awt.Color(22, 41, 42));
-        jButton4.setFont(new java.awt.Font("SimSun", 1, 12)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(170, 171, 171));
-        jButton4.setText("Scheduling");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        scheduling.setBackground(new java.awt.Color(22, 41, 42));
+        scheduling.setFont(new java.awt.Font("SimSun", 1, 12)); // NOI18N
+        scheduling.setForeground(new java.awt.Color(170, 171, 171));
+        scheduling.setText("Scheduling");
+        scheduling.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                schedulingActionPerformed(evt);
             }
         });
-        ProcessPanel.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 482, 230, 30));
+        ProcessPanel.add(scheduling, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 482, 230, 30));
 
         destroyButton.setBackground(new java.awt.Color(22, 41, 42));
         destroyButton.setFont(new java.awt.Font("SimSun", 1, 12)); // NOI18N
@@ -773,68 +780,18 @@ public class nexOS extends javax.swing.JFrame {
 
         getContentPane().add(SchedulingPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 540));
 
-        MainPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        sync.setMaximumSize(new java.awt.Dimension(960, 540));
+        sync.setMinimumSize(new java.awt.Dimension(960, 540));
+        sync.setPreferredSize(new java.awt.Dimension(960, 540));
+        sync.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel28.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel28MouseClicked(evt);
-            }
-        });
-        MainPanel.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 210, 440, 120));
+        jPanel1.setBackground(new java.awt.Color(0, 102, 102));
+        sync.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 620, 320));
 
-        jButton3.setBackground(new java.awt.Color(22, 41, 42));
-        jButton3.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(170, 171, 171));
-        jButton3.setText("Socket Programming");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        MainPanel.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 450, 160, 40));
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/SYNCHRONIZATION.png"))); // NOI18N
+        sync.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 540));
 
-        MemoryManag.setBackground(new java.awt.Color(22, 41, 42));
-        MemoryManag.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
-        MemoryManag.setForeground(new java.awt.Color(170, 171, 171));
-        MemoryManag.setText("Memory management");
-        MemoryManag.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MemoryManagActionPerformed(evt);
-            }
-        });
-        MainPanel.add(MemoryManag, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 450, 160, 40));
-
-        ProcessManagementButton.setBackground(new java.awt.Color(22, 41, 42));
-        ProcessManagementButton.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
-        ProcessManagementButton.setForeground(new java.awt.Color(170, 171, 171));
-        ProcessManagementButton.setText("Process management ");
-        ProcessManagementButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ProcessManagementButtonMouseClicked(evt);
-            }
-        });
-        ProcessManagementButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ProcessManagementButtonActionPerformed(evt);
-            }
-        });
-        MainPanel.add(ProcessManagementButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 450, 160, 40));
-
-        jButton8.setBackground(new java.awt.Color(22, 41, 42));
-        jButton8.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
-        jButton8.setForeground(new java.awt.Color(170, 171, 171));
-        jButton8.setText("I/O management");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
-            }
-        });
-        MainPanel.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 450, 160, 40));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/nexos.png"))); // NOI18N
-        MainPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 540));
-
-        getContentPane().add(MainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(sync, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 540));
 
         createPanel.setBackground(new java.awt.Color(22, 41, 42));
         createPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -867,6 +824,90 @@ public class nexOS extends javax.swing.JFrame {
 
         getContentPane().add(createPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, 2, 970, 540));
 
+        MainPanel.setMaximumSize(new java.awt.Dimension(960, 540));
+        MainPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton3.setBackground(new java.awt.Color(22, 41, 42));
+        jButton3.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(170, 171, 171));
+        jButton3.setText("Socket Programming");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        MainPanel.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 450, 150, 40));
+
+        MemoryManag.setBackground(new java.awt.Color(22, 41, 42));
+        MemoryManag.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
+        MemoryManag.setForeground(new java.awt.Color(170, 171, 171));
+        MemoryManag.setText("Memory management");
+        MemoryManag.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MemoryManagActionPerformed(evt);
+            }
+        });
+        MainPanel.add(MemoryManag, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 450, 150, 40));
+
+        ProcessManagementButton.setBackground(new java.awt.Color(22, 41, 42));
+        ProcessManagementButton.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
+        ProcessManagementButton.setForeground(new java.awt.Color(170, 171, 171));
+        ProcessManagementButton.setText("Process management ");
+        ProcessManagementButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ProcessManagementButtonMouseClicked(evt);
+            }
+        });
+        ProcessManagementButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ProcessManagementButtonActionPerformed(evt);
+            }
+        });
+        MainPanel.add(ProcessManagementButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 450, 150, 40));
+
+        jButton8.setBackground(new java.awt.Color(22, 41, 42));
+        jButton8.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
+        jButton8.setForeground(new java.awt.Color(170, 171, 171));
+        jButton8.setText("I/O management");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+        MainPanel.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 450, 150, 40));
+
+        ProcessManagementButton1.setBackground(new java.awt.Color(22, 41, 42));
+        ProcessManagementButton1.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
+        ProcessManagementButton1.setForeground(new java.awt.Color(170, 171, 171));
+        ProcessManagementButton1.setText("Create Process");
+        ProcessManagementButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ProcessManagementButton1MouseClicked(evt);
+            }
+        });
+        ProcessManagementButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ProcessManagementButton1ActionPerformed(evt);
+            }
+        });
+        MainPanel.add(ProcessManagementButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 150, 40));
+
+        Synchronization.setBackground(new java.awt.Color(22, 41, 42));
+        Synchronization.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
+        Synchronization.setForeground(new java.awt.Color(170, 171, 171));
+        Synchronization.setText("Synchronization");
+        Synchronization.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SynchronizationActionPerformed(evt);
+            }
+        });
+        MainPanel.add(Synchronization, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 450, 150, 40));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/nexos.png"))); // NOI18N
+        MainPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 540));
+
+        getContentPane().add(MainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 540));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -883,7 +924,8 @@ public class nexOS extends javax.swing.JFrame {
     }//GEN-LAST:event_ProcessManagementButtonMouseClicked
 
     private void ProcessManagementButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProcessManagementButtonActionPerformed
-        MainPanel.setVisible(false);
+      
+       MainPanel.setVisible(false);
         displayPScroll.setVisible(true);
         displayPPanel.setVisible(true);
         ProcessPanel.setVisible(true);
@@ -981,7 +1023,7 @@ private class SuspendActionListener implements ActionListener {
         // For example, repaint the panel after suspension
         resumeButtonActionPerformed(null); // Update the displayed list after suspension
     }
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void schedulingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_schedulingActionPerformed
         for (int i = 0; i < n - 1; i++) {
         boolean swapped = false;
         for (int j = 0; j < n - 1 - i; j++) {
@@ -1003,7 +1045,7 @@ private class SuspendActionListener implements ActionListener {
         MainPanel.setVisible(false);
         createPanel.setVisible(false);
 // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_schedulingActionPerformed
 
     private void changePriorityButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changePriorityButtonActionPerformed
         changePriorityPanel.setVisible(true);
@@ -1012,88 +1054,8 @@ private class SuspendActionListener implements ActionListener {
     }//GEN-LAST:event_changePriorityButtonActionPerformed
 
     private void dispatchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dispatchButtonActionPerformed
-      
-        changePriorityPanel.setVisible(false);// Clear existing components from suspendPanel
-        suspendPanel.removeAll();
-        suspendPanel.setLayout(null); // Set layout to null for absolute positioning
-
-        // Define initial coordinates for headers and data
-        int xHeaderOffset = 10;
-        int yHeaderOffset = 10;
-        int xDataOffset = 10;
-        int yDataOffset = 40;
-
-        // Create header labels
-        JLabel suspendPID = createHeaderLabel("ID");
-        suspendPID.setBounds(xHeaderOffset, yHeaderOffset, 80, 30);
-        suspendPanel.add(suspendPID);
-
-        JLabel suspendPN = createHeaderLabel("Name");
-        suspendPN.setBounds(xHeaderOffset + 100, yHeaderOffset, 150, 30);
-        suspendPanel.add(suspendPN);
-
-        JLabel suspendPAT = createHeaderLabel("Arrival Time");
-        suspendPAT.setBounds(xHeaderOffset + 200, yHeaderOffset, 120, 30);
-        suspendPanel.add(suspendPAT);
-
-        JLabel suspendPBT = createHeaderLabel("Burst Time");
-        suspendPBT.setBounds(xHeaderOffset + 360, yHeaderOffset, 120, 30);
-        suspendPanel.add(suspendPBT);
-
-        JLabel suspendLabel = createHeaderLabel("Start");
-        suspendLabel.setBounds(xHeaderOffset + 520, yHeaderOffset, 80, 30);
-        suspendPanel.add(suspendLabel);
-
-        // Iterate over existing processes and display their details with suspend buttons
-        for (int i = 0; i < n; i++) {
-            Process currentProcess = process[i];
-            if(currentProcess.status.equals("Ready")){
-                // Create and display JLabels for process details
-                JLabel idLabel = createLabel(String.valueOf(currentProcess.id));
-                idLabel.setBounds(xDataOffset, yDataOffset, 80, 30);
-                suspendPanel.add(idLabel);
-
-                JLabel nameLabel = createLabel(currentProcess.name);
-                nameLabel.setBounds(xDataOffset + 100, yDataOffset, 150, 30);
-                suspendPanel.add(nameLabel);
-
-                JLabel arrivalLabel = createLabel(String.valueOf(currentProcess.arrivalTime));
-                arrivalLabel.setBounds(xDataOffset + 200, yDataOffset, 120, 30);
-                suspendPanel.add(arrivalLabel);
-
-                JLabel burstLabel = createLabel(String.valueOf(currentProcess.burstTime));
-                burstLabel.setBounds(xDataOffset + 360, yDataOffset, 120, 30);
-                suspendPanel.add(burstLabel);
-
-                // Create and display suspend button
-                JButton resumeBtn = new JButton("Start");
-                resumeBtn.setFont(new Font("SimSun", Font.PLAIN, 12));
-                resumeBtn.setForeground(new Color(171, 170, 170));
-                resumeBtn.setBackground(new Color(41, 24, 40));
-                resumeBtn.setBounds(xDataOffset + 520, yDataOffset, 80, 30);
-                resumeBtn.addActionListener(new StartActionListener(currentProcess));
-                suspendPanel.add(resumeBtn);
-                // Increment y offset for the next row
-                yDataOffset += 40;
-            }
-
-        }
-
-        // Set preferred size of suspendPanel based on the content
-        suspendPanel.setPreferredSize(new Dimension(620, yDataOffset + 20));
-
-        // Repaint the suspendPanel to reflect changes
-        suspendPanel.revalidate();
-        suspendPanel.repaint();
-
-        // Hide other panels and show the suspendPanel
-        displayPPanel.setVisible(false);
-        displayPScroll.setVisible(false);
-        destroyPanel.setVisible(false);
-        destroyScroll.setVisible(false);
-        suspendPanel.setVisible(true);
-        suspendScroll.setVisible(true);
-// TODO add your handling code here:
+       schedulingActionPerformed(evt);      
+    
     }//GEN-LAST:event_dispatchButtonActionPerformed
     private class StartActionListener implements ActionListener {
 
@@ -1868,7 +1830,7 @@ MemoryManagement.setVisible(false);
         }
         // Perform FCFS scheduling
         for (Process p : process) {
-            if (p != null) { 
+          if (p != null && p.status.equals("Ready")) { 
                 // Update the current time
                 if (p.arrivalTime > currentTime) {
                     currentTime = p.arrivalTime;
@@ -1948,7 +1910,7 @@ MemoryManagement.setVisible(false);
         patat.setBounds(xDataOffset + 800, yDataOffset, 120, 30);
         DisplaySchedulingPanel.add(patat);
         for (Process p : process) {
-            if (p != null) { 
+            if (p != null&& p.status.equals("Ready")) { 
                 JLabel pid = createHeaderLabel(""+p.id);
                 pid.setBounds(xDataOffset, yDataOffset, 80, 30);
                 DisplaySchedulingPanel.add(pid);
@@ -1992,10 +1954,9 @@ MemoryManagement.setVisible(false);
         DisplaySchedulingPanel.revalidate();
         DisplaySchedulingPanel.repaint();
         for(int i =0; i<n; i++){
+            if(process[i].status.equals("Ready"))
             process[i].setStatus("Running");
         }
-//        System.out.println("Average Waiting Time: " + avgWaitingTime);
-//        System.out.println("Average Turnaround Time: " + avgTurnaroundTime);
     }//GEN-LAST:event_fcfsButtonActionPerformed
 
     private void sjfButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sjfButtonActionPerformed
@@ -2063,9 +2024,9 @@ MemoryManagement.setVisible(false);
     while (completed != n) {
         foundProcess = false;
         int minRemainingTime = Integer.MAX_VALUE;
-
+  // Check if process is ready and its arrival time has been reached
         for (int i = 0; i < n; i++) {
-            if (tempProcess[i].arrivalTime <= currentTime && remainingBurstTime[i] > 0 && remainingBurstTime[i] < minRemainingTime) {
+            if (tempProcess[i] != null && tempProcess[i].status.equals("Ready") && tempProcess[i].arrivalTime <= currentTime && remainingBurstTime[i] > 0 && remainingBurstTime[i] < minRemainingTime) {
                 minRemainingTime = remainingBurstTime[i];
                 shortest = i;
                 foundProcess = true;
@@ -2133,6 +2094,7 @@ MemoryManagement.setVisible(false);
         DisplaySchedulingPanel.revalidate();
         DisplaySchedulingPanel.repaint();
         for(int i =0; i<n; i++){
+              if (tempProcess[i].status.equals("Ready"))
             process[i].setStatus("Running");
         }
     }//GEN-LAST:event_sjfButtonActionPerformed
@@ -2202,21 +2164,18 @@ MemoryManagement.setVisible(false);
     int[] originalBurstTime = new int[n];
     boolean[] isFirstResponse = new boolean[n];
     int[] responseTimes = new int[n];
-
     for (int i = 0; i < n; i++) {
         remainingBurstTime[i] = tempProcess[i].burstTime;
         originalBurstTime[i] = tempProcess[i].burstTime;
         isFirstResponse[i] = true;
     }
-
     int currentTime = 0;
     int completed = 0;
-
     while (completed < n) {
         boolean processInCycle = false;
 
         for (int i = 0; i < n; i++) {
-            if (tempProcess[i].arrivalTime <= currentTime && remainingBurstTime[i] > 0) {
+            if (tempProcess[i].status.equals("Ready")&& tempProcess[i].arrivalTime <= currentTime && remainingBurstTime[i] > 0) {
                 processInCycle = true;
 
                 if (isFirstResponse[i]) {
@@ -2297,6 +2256,7 @@ MemoryManagement.setVisible(false);
         DisplaySchedulingPanel.revalidate();
         DisplaySchedulingPanel.repaint();
         for(int i =0; i<n; i++){
+            if(process[i].status.equals("Ready"))
             process[i].setStatus("Running");
         }
     }//GEN-LAST:event_rrButtonActionPerformed
@@ -2366,7 +2326,7 @@ MemoryManagement.setVisible(false);
         boolean foundProcess = false;
 
         for (int i = 0; i < n; i++) {
-            if (tempProcess[i].arrivalTime <= currentTime && remainingBurstTime[i] > 0 && tempProcess[i].burstTime < minBurstTime) {
+            if  (tempProcess[i] != null && tempProcess[i].status.equals("Ready") && tempProcess[i].arrivalTime <= currentTime && remainingBurstTime[i] > 0 && tempProcess[i].burstTime < minBurstTime) {
                 minBurstTime = tempProcess[i].burstTime;
                 shortest = i;
                 foundProcess = true;
@@ -2433,6 +2393,7 @@ MemoryManagement.setVisible(false);
         DisplaySchedulingPanel.revalidate();
         DisplaySchedulingPanel.repaint();
         for(int i =0; i<n; i++){
+              if (tempProcess[i].status.equals("Ready"))
             process[i].setStatus("Running");
         }
     }//GEN-LAST:event_sjfNonPremButtonActionPerformed
@@ -2460,7 +2421,7 @@ MemoryManagement.setVisible(false);
 
     // Perform FCFS scheduling
     for (Process p : process) {
-        if (p != null) { 
+        if (p != null && p.status.equals("Ready")) { 
             // Update the current time
             if (p.arrivalTime > currentTime) {
                 currentTime = p.arrivalTime;
@@ -2539,7 +2500,7 @@ MemoryManagement.setVisible(false);
         patat.setBounds(xDataOffset + 800, yDataOffset, 120, 30);
         DisplaySchedulingPanel.add(patat);
         for (Process p : process) {
-            if (p != null) { 
+            if (p != null && p.status.equals("Ready")) { 
                 JLabel pid = createHeaderLabel(""+p.id);
                 pid.setBounds(xDataOffset, yDataOffset, 80, 30);
                 DisplaySchedulingPanel.add(pid);
@@ -2583,6 +2544,7 @@ MemoryManagement.setVisible(false);
         DisplaySchedulingPanel.revalidate();
         DisplaySchedulingPanel.repaint();
         for(int i =0; i<n; i++){
+            if(process[i].status.equals("Ready"))
             process[i].setStatus("Running");
         }
         // TODO add your handling code here:
@@ -3044,11 +3006,118 @@ private long convertToBits(String input) {
     }
     }//GEN-LAST:event_PagingActionPerformed
 
-    private void jLabel28MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel28MouseClicked
-        MainPanel.setVisible(false);
-        createPanel.setVisible(true);
+    private void ProcessManagementButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProcessManagementButton1MouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel28MouseClicked
+    }//GEN-LAST:event_ProcessManagementButton1MouseClicked
+
+    private void ProcessManagementButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProcessManagementButton1ActionPerformed
+          MainPanel.setVisible(false);
+        createPanel.setVisible(true);
+        createPanel3.setVisible(true);
+    }//GEN-LAST:event_ProcessManagementButton1ActionPerformed
+private void updatePanel(String message) {
+    // Create a new JLabel for the message
+    JLabel label = new JLabel(message);
+    
+    // Set the font and foreground color (adjust as needed)
+    label.setFont(new Font("simsun", Font.PLAIN, 16));
+    label.setForeground(new Color(171, 170, 170));
+    
+    // Calculate the Y position for the new label
+    int labelHeight = 30; // Adjust the height of the label as needed
+    int gap = 10; // Adjust the gap between messages as needed
+    int yPosition = getNextYPosition(labelHeight, gap);
+    
+    // Set bounds for the label
+    label.setBounds((jPanel1.getWidth() - 200) / 2, yPosition, 200, labelHeight);
+    
+    // Add the label to jPanel1
+    jPanel1.add(label);
+    
+    // Update Y position for the gap
+    int gapYPosition = yPosition + labelHeight + gap;
+    
+    // Add a gap after the label
+    JLabel gapLabel = new JLabel("");
+    gapLabel.setBounds((jPanel1.getWidth() - 200) / 2, gapYPosition, 200, gap);
+    jPanel1.add(gapLabel);
+    
+    // Refresh the panel to reflect the changes
+    jPanel1.revalidate();
+    jPanel1.repaint();
+}
+
+// Helper method to calculate the next Y position for the label
+private int getNextYPosition(int labelHeight, int gap) {
+    Component[] components = jPanel1.getComponents();
+    int maxY = 0;
+    
+    // Find the bottom Y position of the last label
+    for (Component component : components) {
+        int bottomY = component.getY() + component.getHeight();
+        if (bottomY > maxY) {
+            maxY = bottomY;
+        }
+    }
+    
+    // Calculate the next Y position with a gap
+    return maxY + gap;
+}
+
+
+
+    private void SynchronizationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SynchronizationActionPerformed
+MainPanel.setVisible(false);
+        sync.setVisible(true);                                                      // Object to synchronize on
+    final Object lock = new Object();
+
+    // Thread process1
+    Thread process1 = new Thread(new Runnable() {
+        public void run() {
+            synchronized (lock) {
+                for (int i = 1; i <= 10; i++) {
+                    try {
+                       // System.out.println("Process 1 - Iteration: " + i);
+                        // Assuming you have a method to update the panel, e.g., updatePanel("Process 1 - Iteration: " + i);
+                        updatePanel("Process 1 - Iteration: " + i + "\n\n");
+                        lock.notify();  // Notify the other thread
+                        lock.wait();    // Wait for the other thread to complete its turn
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                        e.printStackTrace();
+                    }
+                }
+                lock.notify();  // Notify the other thread to exit wait if it's still waiting
+            }
+        }
+    });
+
+    // Thread process2
+    Thread process2 = new Thread(new Runnable() {
+        public void run() {
+            synchronized (lock) {
+                for (int i = 1; i <= 10; i++) {
+                    try {
+                       // System.out.println("Process 2 - Iteration: " + i);
+                        // Assuming you have a method to update the panel, e.g., updatePanel("Process 2 - Iteration: " + i);
+                        updatePanel("Process 2 - Iteration: " + i);
+                        lock.notify();  // Notify the other thread
+                        lock.wait();    // Wait for the other thread to complete its turn
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                        e.printStackTrace();
+                    }
+                }
+                lock.notify();  // Notify the other thread to exit wait if it's still waiting
+            }
+        }
+    });
+
+    // Start both threads
+    process1.start();
+    process2.start();
+
+    }//GEN-LAST:event_SynchronizationActionPerformed
 private JLabel createHeaderLabel3(String text) {
     JLabel label = new JLabel(text);
     label.setFont(new Font("Arial", Font.BOLD, 14));
@@ -3137,9 +3206,11 @@ private int getPriorityValue(String priority) {
     private javax.swing.JPanel PaggingPanel;
     private javax.swing.JButton Paging;
     private javax.swing.JButton ProcessManagementButton;
+    private javax.swing.JButton ProcessManagementButton1;
     private javax.swing.JPanel ProcessPanel;
     private javax.swing.JPanel SchedulingPanel;
     private javax.swing.JPanel SocketPanel;
+    private javax.swing.JButton Synchronization;
     private javax.swing.JButton blockButton;
     private javax.swing.JButton changePriorityButton;
     private javax.swing.JTextField changePriorityPId;
@@ -3169,7 +3240,6 @@ private int getPriorityValue(String priority) {
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
@@ -3194,13 +3264,14 @@ private int getPriorityValue(String priority) {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTabbedPane jTabbedPane1;
@@ -3219,11 +3290,13 @@ private int getPriorityValue(String priority) {
     private javax.swing.JTextField referstring;
     private javax.swing.JButton resumeButton;
     private javax.swing.JButton rrButton;
+    private javax.swing.JButton scheduling;
     private javax.swing.JButton sjfButton;
     private javax.swing.JButton sjfNonPremButton;
     private javax.swing.JButton suspendButton;
     private javax.swing.JPanel suspendPanel;
     private javax.swing.JScrollPane suspendScroll;
+    private javax.swing.JPanel sync;
     private javax.swing.JButton wakeButton;
     // End of variables declaration//GEN-END:variables
 
